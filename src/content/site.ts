@@ -507,7 +507,7 @@ export const research = [
     linkLabel: "DOI: 10.1109/GCAT55367.2022.9971827",
   },
   {
-    type: "Thesis",
+    type: "Academic writing",
     title:
       "Automated IELTS Writing Evaluation and Handwriting Recognition Using CNN, RNN, and the GPT-3 API",
     venue: "Leading University, 2023",
