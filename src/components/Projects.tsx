@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { projects } from "@/content/site";
+import { projects, research } from "@/content/site";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
 
@@ -8,8 +8,8 @@ export default function Projects() {
     <SectionHeader
       id="projects"
       eyebrow="Selected work"
-      title="Projects"
-      lead="Products I've shipped or am building — one of my own, three from Inverse.AI."
+      title="Projects & research"
+      lead="Products I've shipped or am building — one of my own, three from Inverse.AI — and the research behind them."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {projects.map((project, i) => (
@@ -71,6 +71,40 @@ export default function Projects() {
                   style={{ color: project.color }}
                 >
                   {project.linkLabel} ↗
+                </a>
+              ) : null}
+            </article>
+          </Reveal>
+        ))}
+      </div>
+
+      {/* Research sits in the same section as the work it relates to, but
+          visible rather than behind a tab — a paper only counts if it's read. */}
+      <Reveal>
+        <div className="mt-14 mb-7 flex items-center gap-4">
+          <span className="h-px flex-1" style={{ background: "var(--line)" }} aria-hidden="true" />
+          <h3 className="font-mono text-[0.62rem] tracking-[0.2em] text-faint uppercase">
+            Research
+          </h3>
+          <span className="h-px flex-1" style={{ background: "var(--line)" }} aria-hidden="true" />
+        </div>
+      </Reveal>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {research.map((item, i) => (
+          <Reveal key={item.title} delay={i * 70}>
+            <article className="card card-hover h-full p-6">
+              <span className="chip font-mono">{item.type}</span>
+              <h4 className="mt-3.5 text-sm leading-relaxed font-medium">{item.title}</h4>
+              <p className="mt-2 text-xs text-faint">{item.venue}</p>
+              {"href" in item && item.href ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="link-underline mt-3 inline-block font-mono text-xs text-muted hover:text-brand"
+                >
+                  {item.linkLabel} ↗
                 </a>
               ) : null}
             </article>
