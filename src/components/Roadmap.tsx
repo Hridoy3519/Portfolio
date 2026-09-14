@@ -1,38 +1,41 @@
-import { extensions } from "@/content/site";
-import Platform from "./Platform";
+import { roadmap } from "@/content/site";
 import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 
-/** Stops that aren't on the map yet — drawn as unlaid, dashed track. */
-export default function Extensions() {
+/** Current and longer-term goals, drawn as track that hasn't been laid yet. */
+export default function Roadmap() {
   return (
-    <Platform
-      id="extensions"
-      sign="Proposed extension · Not yet built"
-      title="Where the line goes next"
-      lead="Stops that aren't on the map yet — but the ground is being surveyed."
+    <SectionHeader
+      id="roadmap"
+      eyebrow="Roadmap"
+      title="What's next"
+      lead="Projects and goals I'm actively working toward."
     >
       <div className="grid gap-4 md:grid-cols-2">
-        {extensions.map((ext, i) => (
-          <Reveal key={ext.code} delay={i * 70}>
+        {roadmap.map((item, i) => (
+          <Reveal key={item.code} delay={i * 70}>
             <article
               className="relative h-full rounded-[0.875rem] border-2 border-dashed p-6 transition-colors md:p-7"
               style={{ borderColor: "var(--line-strong)", background: "var(--bg-elev)" }}
             >
               <div className="flex items-center justify-between gap-4">
                 <span className="font-mono text-[0.65rem] tracking-[0.18em] text-faint uppercase">
-                  {ext.code}
+                  {item.code}
                 </span>
                 <span
                   className="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[0.62rem] tracking-wide uppercase"
                   style={{ borderColor: "var(--brand)", color: "var(--brand)" }}
                 >
-                  <span className="live-dot h-1.5 w-1.5 rounded-full" style={{ background: "var(--brand)" }} />
-                  {ext.status}
+                  <span
+                    className="live-dot h-1.5 w-1.5 rounded-full"
+                    style={{ background: "var(--brand)" }}
+                  />
+                  {item.status}
                 </span>
               </div>
 
-              <h3 className="mt-4 text-lg font-semibold tracking-tight">{ext.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{ext.text}</p>
+              <h3 className="mt-4 text-lg font-semibold tracking-tight">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{item.text}</p>
 
               {/* Unlaid track running off the bottom of the card */}
               <span
@@ -46,13 +49,13 @@ export default function Extensions() {
 
       <Reveal delay={160}>
         <p className="mt-8 font-mono text-[0.68rem] leading-relaxed text-faint">
-          Timetable subject to change. Suggestions for new stops are welcome at the{" "}
-          <a href="#final-stop" className="link-underline hover:text-brand">
-            ticket office
+          If any of this overlaps with what you&apos;re building,{" "}
+          <a href="#contact" className="link-underline hover:text-brand">
+            I&apos;d like to hear from you
           </a>
           .
         </p>
       </Reveal>
-    </Platform>
+    </SectionHeader>
   );
 }

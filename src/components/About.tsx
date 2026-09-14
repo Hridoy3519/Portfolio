@@ -1,24 +1,24 @@
 import { languages, profile, socials } from "@/content/site";
-import Platform from "./Platform";
 import Reveal from "./Reveal";
-import WindowView from "./WindowView";
+import Scenery from "./Scenery";
+import SectionHeader from "./SectionHeader";
 
-export default function Driver() {
+export default function About() {
   return (
-    <Platform
-      id="driver"
-      sign="Carriage 01 · Your driver"
-      title="Who's driving this thing"
-      lead="Take a seat by the window. Here's the short version before the first stop."
+    <SectionHeader
+      id="about"
+      eyebrow="Profile"
+      title="About me"
+      lead="A short introduction before the timeline."
     >
       <Reveal>
-        <WindowView />
+        <Scenery />
       </Reveal>
 
       <div className="mt-10 grid gap-10 md:grid-cols-[1.55fr_1fr] md:gap-14">
         <Reveal delay={80}>
           <div className="space-y-5">
-            {profile.driver.map((paragraph) => (
+            {profile.about.map((paragraph) => (
               <p key={paragraph} className="leading-relaxed text-muted">
                 {paragraph}
               </p>
@@ -29,7 +29,7 @@ export default function Driver() {
         <Reveal delay={140}>
           <div className="card p-6">
             <h3 className="font-mono text-[0.65rem] tracking-[0.18em] text-faint uppercase">
-              Passenger details
+              At a glance
             </h3>
             <dl className="mt-5 space-y-4 text-sm">
               <Row label="Based in" value={profile.location} />
@@ -38,7 +38,7 @@ export default function Driver() {
             </dl>
 
             <h3 className="mt-8 font-mono text-[0.65rem] tracking-[0.18em] text-faint uppercase">
-              Languages spoken
+              Languages
             </h3>
             <dl className="mt-5 space-y-4 text-sm">
               {languages.map((lang) => (
@@ -62,7 +62,7 @@ export default function Driver() {
           </div>
         </Reveal>
       </div>
-    </Platform>
+    </SectionHeader>
   );
 }
 

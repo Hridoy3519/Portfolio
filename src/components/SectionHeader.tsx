@@ -1,24 +1,25 @@
 import type { ReactNode } from "react";
 import Reveal from "./Reveal";
 
-type PlatformProps = {
+type SectionHeaderProps = {
   id: string;
-  sign: string;
+  /** Short category label, shown in the bordered sign above the heading. */
+  eyebrow: string;
   title: string;
   lead?: string;
   accent?: string;
   children: ReactNode;
 };
 
-/** Section header styled as a platform sign hanging over the track. */
-export default function Platform({
+/** Section wrapper with a signage-style eyebrow above the heading. */
+export default function SectionHeader({
   id,
-  sign,
+  eyebrow,
   title,
   lead,
   accent = "var(--brand)",
   children,
-}: PlatformProps) {
+}: SectionHeaderProps) {
   return (
     <section id={id} className="shell scroll-mt-24 py-16 md:py-24">
       <Reveal>
@@ -27,7 +28,7 @@ export default function Platform({
             className="inline-flex items-center gap-2 rounded-md border px-2.5 py-1 font-mono text-[0.65rem] tracking-[0.18em] uppercase"
             style={{ borderColor: accent, color: accent }}
           >
-            {sign}
+            {eyebrow}
           </span>
           <h2 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2>
           {lead ? (

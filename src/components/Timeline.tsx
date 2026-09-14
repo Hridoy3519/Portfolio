@@ -1,14 +1,14 @@
-import { type Station, stations } from "@/content/site";
+import { type Stop, stops } from "@/content/site";
 import Reveal from "./Reveal";
 import TrainIcon from "./TrainIcon";
 
-export default function Stations() {
+export default function Timeline() {
   return (
     <div className="shell py-4">
-      {stations.map((station, i) => (
-        <div key={station.id}>
-          {station.leg ? <TrackLeg text={station.leg} /> : null}
-          <StationCard station={station} isLast={i === stations.length - 1} />
+      {stops.map((stop, i) => (
+        <div key={stop.id}>
+          {stop.transition ? <Transition text={stop.transition} /> : null}
+          <StopCard stop={stop} isLast={i === stops.length - 1} />
         </div>
       ))}
     </div>
@@ -16,10 +16,10 @@ export default function Stations() {
 }
 
 /**
- * The stretch of track between two stops. A small train rides down it the
- * first time it scrolls into view, and a milepost notes the distance.
+ * The move from one role to the next. A marker travels down the track the
+ * first time it scrolls into view, and a note records the transition.
  */
-function TrackLeg({ text }: { text: string }) {
+function Transition({ text }: { text: string }) {
   return (
     <Reveal>
       <div className="flex flex-col items-center py-6 md:py-8">
@@ -48,30 +48,29 @@ function TrackLeg({ text }: { text: string }) {
   );
 }
 
-function StationCard({ station, isLast }: { station: Station; isLast: boolean }) {
+function StopCard({ stop, isLast }: { stop: Stop; isLast: boolean }) {
   return (
     <Reveal>
       <article
-        id={station.id}
+        id={stop.id}
         className="card card-hover group relative scroll-mt-24 overflow-hidden"
-        style={{ borderTop: `3px solid ${station.color}` }}
+        style={{ borderTop: `3px solid ${stop.color}` }}
       >
-        {/* Ambient light in the station's colour */}
+        {/* Ambient light in the stop's colour */}
         <span
           className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full opacity-[0.14] blur-3xl"
-          style={{ background: station.color }}
+          style={{ background: stop.color }}
           aria-hidden="true"
         />
-        {/* Station code, painted large on the platform wall */}
+        {/* Location code, set large as a watermark */}
         <span
-          className="font-display pointer-events-none absolute -right-2 -bottom-8 leading-none font-bold tracking-tighter select-none opacity-[0.045] md:-bottom-10"
-          style={{ color: station.color, fontSize: "clamp(7rem, 16vw, 11rem)" }}
+          className="font-display pointer-events-none absolute -right-2 -bottom-8 leading-none font-bold tracking-tighter opacity-[0.045] select-none md:-bottom-10"
+          style={{ color: stop.color, fontSize: "clamp(7rem, 16vw, 11rem)" }}
           aria-hidden="true"
         >
-          {station.code}
+          {stop.code}
         </span>
 
-        {/* Platform sign */}
         <header
           className="relative flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5 md:px-8"
           style={{ background: "color-mix(in srgb, var(--bg-subtle) 72%, transparent)" }}
@@ -79,65 +78,62 @@ function StationCard({ station, isLast }: { station: Station; isLast: boolean })
           <div className="flex min-w-0 items-center gap-4">
             <span
               className="grid h-11 w-11 shrink-0 place-items-center rounded-lg font-mono text-sm font-semibold transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-6"
-              style={{ background: station.color, color: "#0a0b0f" }}
+              style={{ background: stop.color, color: "#0a0b0f" }}
             >
-              {station.code}
+              {stop.code}
             </span>
             <div className="min-w-0">
               <p className="font-mono text-[0.62rem] tracking-[0.18em] text-faint uppercase">
-                Stop {station.number} · {station.kind}
+                {stop.number} · {stop.kind}
               </p>
               <h3 className="mt-0.5 truncate text-lg font-semibold tracking-tight md:text-xl">
-                {station.name}
+                {stop.name}
               </h3>
             </div>
           </div>
 
           <div className="flex items-center gap-2.5">
-            {station.current ? (
+            {stop.current ? (
               <span
                 className="live-dot h-1.5 w-1.5 rounded-full"
-                style={{ background: station.color }}
+                style={{ background: stop.color }}
                 aria-hidden="true"
               />
             ) : null}
-            <span className="font-mono text-xs whitespace-nowrap text-muted">
-              {station.period}
-            </span>
+            <span className="font-mono text-xs whitespace-nowrap text-muted">{stop.period}</span>
           </div>
         </header>
 
-        {/* Platform edge — the safety stripe */}
+        {/* Platform-edge stripe */}
         <span
           className="relative block h-[3px] w-full opacity-50"
           style={{
-            backgroundImage: `repeating-linear-gradient(-45deg, ${station.color} 0 8px, transparent 8px 16px)`,
+            backgroundImage: `repeating-linear-gradient(-45deg, ${stop.color} 0 8px, transparent 8px 16px)`,
           }}
           aria-hidden="true"
         />
 
         <div className="relative px-6 py-7 md:px-8 md:py-8">
           <p className="text-sm">
-            <span className="font-medium">{station.role}</span>
-            <span className="text-faint"> · </span>
-            <span style={{ color: station.color }}>{station.operator}</span>
-            <span className="text-faint"> · {station.place}</span>
+            <span className="font-medium" style={{ color: stop.color }}>
+              {stop.role}
+            </span>
+            <span className="text-faint"> · {stop.place}</span>
           </p>
 
-          {/* Platform announcement */}
           <p
-            className="mt-5 border-l-2 pl-4 text-sm leading-relaxed text-muted italic"
-            style={{ borderColor: station.color }}
+            className="mt-5 border-l-2 pl-4 text-sm leading-relaxed text-muted"
+            style={{ borderColor: stop.color }}
           >
-            “{station.announcement}”
+            {stop.summary}
           </p>
 
           <ul className="mt-6 space-y-2.5">
-            {station.highlights.map((point) => (
+            {stop.highlights.map((point) => (
               <li key={point} className="flex gap-3 text-sm leading-relaxed text-muted">
                 <span
                   className="mt-[0.62em] h-[3px] w-[3px] shrink-0 rounded-full"
-                  style={{ background: station.color }}
+                  style={{ background: stop.color }}
                   aria-hidden="true"
                 />
                 <span>{point}</span>
@@ -145,17 +141,17 @@ function StationCard({ station, isLast }: { station: Station; isLast: boolean })
             ))}
           </ul>
 
-          {station.facts?.length ? (
+          {stop.facts?.length ? (
             <dl
               className={`mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line ${
-                station.facts.length >= 4 ? "md:grid-cols-4" : ""
+                stop.facts.length >= 4 ? "md:grid-cols-4" : ""
               }`}
               style={{ background: "var(--line)" }}
             >
-              {station.facts.map((fact) => (
+              {stop.facts.map((fact) => (
                 <div key={fact.label} className="bg-elev px-4 py-3.5">
                   <dt className="text-[0.65rem] leading-snug text-faint">{fact.label}</dt>
-                  <dd className="mt-1 font-mono text-sm font-medium" style={{ color: station.color }}>
+                  <dd className="mt-1 font-mono text-sm font-medium" style={{ color: stop.color }}>
                     {fact.value}
                   </dd>
                 </div>
@@ -164,23 +160,23 @@ function StationCard({ station, isLast }: { station: Station; isLast: boolean })
           ) : null}
 
           <div className="mt-6 flex flex-wrap items-center gap-1.5">
-            {station.tech.map((tech) => (
+            {stop.tech.map((tech) => (
               <span key={tech} className="chip font-mono">
                 {tech}
               </span>
             ))}
           </div>
 
-          {station.links?.length ? (
+          {stop.links?.length ? (
             <div className="mt-5 flex flex-wrap gap-4">
-              {station.links.map((link) => (
+              {stop.links.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
                   className="link-underline font-mono text-xs"
-                  style={{ color: station.color }}
+                  style={{ color: stop.color }}
                 >
                   {link.label} ↗
                 </a>
@@ -195,9 +191,9 @@ function StationCard({ station, isLast }: { station: Station; isLast: boolean })
             style={{ background: "var(--bg-subtle)" }}
           >
             <p className="font-mono text-[0.65rem] tracking-wide text-faint uppercase">
-              End of the line so far —{" "}
-              <a href="#extensions" className="link-underline hover:text-brand">
-                proposed extensions further down the map
+              Most recent role —{" "}
+              <a href="#roadmap" className="link-underline hover:text-brand">
+                see what&apos;s next below
               </a>
             </p>
           </footer>

@@ -1,22 +1,20 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { route, stations } from "@/content/site";
+import { route, stops } from "@/content/site";
 import TrainIcon from "./TrainIcon";
 
-type Stop = { id: string; label: string; short: string; color: string; pct: number };
+type Marker = { id: string; label: string; short: string; color: string; pct: number };
 
-const colorFor = (id: string) =>
-  stations.find((s) => s.id === id)?.color ?? "var(--brand)";
+const colorFor = (id: string) => stops.find((s) => s.id === id)?.color ?? "var(--brand)";
 
 /**
- * A fixed metro-map rail down the left margin. Station dots sit at the scroll
- * position that brings each section into view, and the train marker rides the
- * rail as the visitor scrolls — so the train reaches a dot exactly when its
- * section arrives.
+ * A fixed route map down the left margin. Section markers sit at the scroll
+ * position that brings each section into view, and the position indicator
+ * rides the line as the visitor scrolls.
  */
-export default function RailProgress() {
-  const [stops, setStops] = useState<Stop[]>([]);
+export default function RouteMap() {
+  const [markers, setMarkers] = useState<Marker[]>([]);
   const [progress, setProgress] = useState(0);
   const frame = useRef<number | null>(null);
 
@@ -43,9 +41,9 @@ export default function RailProgress() {
           pct: target / maxScroll,
         };
       })
-      .filter((s): s is Stop => s !== null);
+      .filter((s): s is Marker => s !== null);
 
-    setStops(next);
+    setMarkers(next);
   }, []);
 
   useEffect(() => {
@@ -79,55 +77,47 @@ export default function RailProgress() {
     };
   }, [measure]);
 
-  if (stops.length === 0) return null;
+  if (markers.length === 0) return null;
 
   return (
     <aside
-      className="fixed left-6 top-1/2 z-40 hidden h-[62vh] -translate-y-1/2 xl:block"
+      className="fixed top-1/2 left-6 z-40 hidden h-[62vh] -translate-y-1/2 xl:block"
       aria-hidden="true"
     >
       <div className="relative h-full w-3">
-        {/* Rail */}
-        <span className="track-rail absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2" />
+        <span className="track-rail absolute top-0 left-1/2 h-full w-[2px] -translate-x-1/2" />
 
-        {/* Track already travelled */}
+        {/* Portion already scrolled */}
         <span
-          className="absolute left-1/2 top-0 w-[2px] -translate-x-1/2 rounded-full transition-[height] duration-150 ease-out"
-          style={{
-            height: `${progress * 100}%`,
-            background: "var(--brand)",
-            opacity: 0.85,
-          }}
+          className="absolute top-0 left-1/2 w-[2px] -translate-x-1/2 rounded-full transition-[height] duration-150 ease-out"
+          style={{ height: `${progress * 100}%`, background: "var(--brand)", opacity: 0.85 }}
         />
 
-        {/* Station dots */}
-        {stops.map((stop) => {
-          const passed = progress >= stop.pct - 0.004;
+        {markers.map((marker) => {
+          const passed = progress >= marker.pct - 0.004;
           return (
             <span
-              key={stop.id}
+              key={marker.id}
               className="group absolute left-1/2 -translate-x-1/2 -translate-y-1/2"
-              style={{ top: `${stop.pct * 100}%` }}
+              style={{ top: `${marker.pct * 100}%` }}
             >
               <span
                 className="block rounded-full border-2 transition-all duration-300"
                 style={{
                   width: passed ? 10 : 8,
                   height: passed ? 10 : 8,
-                  background: passed ? stop.color : "var(--bg)",
-                  borderColor: passed ? stop.color : "var(--rail)",
+                  background: passed ? marker.color : "var(--bg)",
+                  borderColor: passed ? marker.color : "var(--rail)",
                 }}
               />
-              <span
-                className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-line bg-elev px-2 py-1 font-mono text-[0.62rem] text-muted opacity-0 shadow-card transition-opacity duration-200 group-hover:opacity-100"
-              >
-                {stop.label}
+              <span className="pointer-events-none absolute top-1/2 left-5 -translate-y-1/2 rounded-md border border-line bg-elev px-2 py-1 font-mono text-[0.62rem] whitespace-nowrap text-muted opacity-0 shadow-card transition-opacity duration-200 group-hover:opacity-100">
+                {marker.label}
               </span>
             </span>
           );
         })}
 
-        {/* The train */}
+        {/* Position indicator */}
         <span
           className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 transition-[top] duration-150 ease-out"
           style={{ top: `${progress * 100}%` }}

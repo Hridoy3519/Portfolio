@@ -3,7 +3,7 @@
  * different speeds, so the horizon crawls while the foreground rushes past.
  * Purely decorative — hidden from assistive tech.
  */
-export default function WindowView() {
+export default function Scenery() {
   return (
     <div
       className="relative h-40 overflow-hidden rounded-xl border md:h-52"

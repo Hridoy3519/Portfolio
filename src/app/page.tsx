@@ -1,15 +1,15 @@
-import DepartureBoard from "@/components/DepartureBoard";
-import Driver from "@/components/Driver";
-import EngineRoom from "@/components/EngineRoom";
-import Extensions from "@/components/Extensions";
-import FinalStop from "@/components/FinalStop";
+import About from "@/components/About";
+import Achievements from "@/components/Achievements";
+import Background from "@/components/Background";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
-import ObservationCar from "@/components/ObservationCar";
-import Origin from "@/components/Origin";
-import RailProgress from "@/components/RailProgress";
-import Stations from "@/components/Stations";
-import { profile, socials, stations } from "@/content/site";
+import Overview from "@/components/Overview";
+import Roadmap from "@/components/Roadmap";
+import RouteMap from "@/components/RouteMap";
+import Skills from "@/components/Skills";
+import Timeline from "@/components/Timeline";
+import { profile, socials, stops } from "@/content/site";
 
 /** Structured data so search engines and AI crawlers read the résumé correctly. */
 const personSchema = {
@@ -20,13 +20,12 @@ const personSchema = {
   email: `mailto:${profile.email}`,
   url: profile.siteUrl,
   address: { "@type": "PostalAddress", addressLocality: "Helsinki", addressCountry: "FI" },
-  alumniOf: [
-    { "@type": "CollegeOrUniversity", name: "University of Helsinki" },
-    { "@type": "CollegeOrUniversity", name: "Leading University" },
-  ],
+  alumniOf: stops
+    .filter((s) => s.kind === "Education")
+    .map((s) => ({ "@type": "CollegeOrUniversity", name: s.name })),
   worksFor: {
     "@type": "Organization",
-    name: stations.find((s) => s.current)?.operator ?? "IntexResearch Lab",
+    name: stops.find((s) => s.current)?.name ?? "IntexResearch Lab",
   },
   sameAs: socials.filter((s) => !s.href.startsWith("mailto:")).map((s) => s.href),
 };
@@ -39,16 +38,16 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
       <Nav />
-      <RailProgress />
+      <RouteMap />
       <main>
-        <DepartureBoard />
-        <Driver />
-        <Origin />
-        <Stations />
-        <EngineRoom />
-        <ObservationCar />
-        <Extensions />
-        <FinalStop />
+        <Overview />
+        <About />
+        <Background />
+        <Timeline />
+        <Skills />
+        <Achievements />
+        <Roadmap />
+        <Contact />
       </main>
       <Footer />
     </>

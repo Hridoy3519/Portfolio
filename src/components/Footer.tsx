@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="border-t border-line">
       <div className="shell flex flex-col items-center justify-between gap-4 py-8 sm:flex-row">
         <p className="font-mono text-[0.68rem] text-faint">
-          © {new Date().getFullYear()} {profile.name} · {profile.lineName}
+          © {new Date().getFullYear()} {profile.name} · {profile.location}
         </p>
         <ul className="flex items-center gap-5">
           {socials.map((s) => (

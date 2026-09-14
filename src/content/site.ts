@@ -1,8 +1,8 @@
 /**
- * Single source of truth for the whole journey.
- * The site is modelled as a rail line: the visitor boards at the departure
- * board and travels through stations, each one a chapter of the career.
- * Edit this file to update the portfolio — no component changes needed.
+ * Single source of truth for the site.
+ * The layout borrows a rail-timetable structure — numbered stops, a route map,
+ * a departure board — but every label reads as a professional portfolio.
+ * Edit this file to update the content; no component changes needed.
  */
 
 export const profile = {
@@ -15,129 +15,138 @@ export const profile = {
   phone: "+358 41 326 6280",
   // Replace with your deployed domain once live — used for SEO + OG tags.
   siteUrl: "https://hridoychowdhury.com",
-  lineName: "The Hridoy Line",
+  availability: "Open to 2027 graduate software engineering roles",
   tagline:
-    "A seven-year ride from a university lab in Sylhet to patient monitors in Helsinki — building software that reaches millions along the way.",
-  driver: [
-    "I'm a Computer Science Master's student at the University of Helsinki and a Software Engineer with production experience across mobile, backend, and low-level systems.",
-    "At Inverse.AI I shipped hardware-accelerated media apps used by 10M+ people. At GE HealthCare I built software for patient monitoring devices, where correctness is a medical-grade requirement. Today I lead the Innovation & Development unit at IntexResearch Lab, turning ideas into shipped products.",
+    "Software engineer with production experience across consumer mobile, low-level media systems and medical devices — building software used by millions.",
+  about: [
+    "I'm a Computer Science Master's student at the University of Helsinki and a software engineer with production experience across mobile, backend and low-level systems.",
+    "At Inverse.AI I shipped hardware-accelerated media applications used by more than ten million people. At GE HealthCare I built software for patient monitoring devices, where correctness is a regulatory requirement. I currently lead the Innovation & Development unit at IntexResearch Lab, taking early-stage ideas through to shipped products.",
     "I care about clean architecture, measurable impact, and software that holds up under real users.",
   ],
 } as const;
 
 export const socials = [
-  { label: "GitHub", href: "https://github.com/hridoy3519", handle: "@hridoy3519" },
+  { label: "GitHub", href: "https://github.com/Hridoy3519", handle: "@Hridoy3519" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/hridoy3519", handle: "in/hridoy3519" },
   { label: "Email", href: `mailto:${profile.email}`, handle: profile.email },
 ] as const;
 
-/** Headline numbers, shown on the departure board as "service information". */
+/** Headline figures, shown as summary metrics under the timetable. */
 export const stats = [
-  { value: "10M+", label: "Users on shipped apps" },
-  { value: "40%", label: "Revenue lift, one migration" },
+  { value: "10M+", label: "Users reached by shipped apps" },
+  { value: "40%", label: "Revenue increase from one migration" },
   { value: "2000+", label: "Algorithm problems solved" },
-  { value: "4", label: "Cities on the line" },
+  { value: "4", label: "Cities lived and worked in" },
 ] as const;
 
-/**
- * The branch line — the years before the main line begins at Stop 01.
- * Kept deliberately light: a few halts, one fork, and what came along for the ride.
- */
+/** Cities, cycled on the split-flap display. */
+export const cities = ["Moulvibazar", "Sylhet", "Dhaka", "Helsinki"] as const;
+
+/** Start and present location, summarised on the contact card. */
+export const journey = {
+  from: { code: "SYL", label: "Sylhet · 2019" },
+  to: { code: "HEL", label: "Helsinki · now" },
+  span: "7 YRS",
+  years: "2019 — PRESENT",
+} as const;
+
 export type ForkTrack = { label: string; note: string; taken?: boolean };
 
-export const origin: {
+/**
+ * Background — the years before the first professional role.
+ */
+export const background: {
   lead: string;
-  halts: { year: string; place: string; text: string }[];
-  fork: { caption: string; tracks: ForkTrack[] };
+  milestones: { year: string; place: string; text: string }[];
+  choice: { caption: string; tracks: ForkTrack[] };
   values: string[];
 } = {
   lead:
-    "Every line starts somewhere. Mine starts in the tea gardens of Moulvibazar — a few small halts before the main line.",
-  halts: [
+    "Before the timeline below: where I grew up, and how I arrived at computer science.",
+  milestones: [
     {
       year: "1999",
-      place: "Moulvibazar",
-      text: "Born in Bangladesh's tea-estate district. Started asking questions early and never really stopped — lucky to be a kid in the Google era.",
+      place: "Moulvibazar, Bangladesh",
+      text: "Born in Bangladesh's tea-estate district. A curious child who asked a great many questions — and was fortunate to grow up when the internet could answer them.",
     },
     {
       year: "School years",
-      place: "English medium",
-      text: "Maths, physics and science were the subjects that explained how the world works. They still are.",
+      place: "English-medium education",
+      text: "Mathematics, physics and the sciences were the subjects that explained how the world works. They still shape how I approach a problem.",
     },
     {
       year: "2018",
       place: "Sylhet",
-      text: "Moved to the city with friends for college. Integrity and trust became the rules I travel by; being good, jolly company became the habit.",
+      text: "Moved to Sylhet for college. Integrity and trust became the principles I work by, alongside a habit of helping the people around me.",
     },
     {
       year: "2019",
-      place: "The fork",
-      text: "Three tracks left the yard: astronomy, psychology, computer science. Took the third — the main line begins at the next stop.",
+      place: "Choosing a field",
+      text: "Three subjects were genuinely in contention: astronomy, psychology and computer science. I chose the third, and the professional timeline starts there.",
     },
   ],
-  fork: {
+  choice: {
     caption:
-      "Three ways out of the yard in 2019. The other two never fully closed — I still look up, and still wonder why people do what they do.",
+      "Three options in 2019. The other two never entirely closed — I still follow astronomy, and still find human behaviour worth understanding.",
     tracks: [
-      { label: "Astronomy", note: "The stars, and the size of everything" },
-      { label: "Psychology", note: "Why people do what they do" },
-      { label: "Computer Science", note: "Programming your imagination", taken: true },
+      { label: "Astronomy", note: "The scale of the universe" },
+      { label: "Psychology", note: "Why people behave as they do" },
+      { label: "Computer Science", note: "Building what you can imagine", taken: true },
     ],
   },
-  /** What travels in the luggage rack on every leg. */
   values: [
     "Integrity",
     "Trust",
     "Curiosity",
-    "Good company",
-    "Sharing what I know",
-    "Maths & physics",
+    "Collaboration",
+    "Knowledge sharing",
+    "Mathematics & physics",
   ],
 };
 
-export type Station = {
+export type Stop = {
   id: string;
+  /** Short location code, shown on the badge and route map. */
   code: string;
   number: string;
+  /** The organisation — this is the card's headline. */
   name: string;
-  operator: string;
-  kind: "Education" | "Work";
+  kind: "Education" | "Experience";
   role: string;
   period: string;
   place: string;
   color: string;
   current?: boolean;
-  /** One-line platform announcement for this stop. */
-  announcement: string;
+  /** Factual one-line summary of the role. */
+  summary: string;
   highlights: string[];
   tech: string[];
   facts?: { label: string; value: string }[];
   links?: { label: string; href: string }[];
-  /** Flavour text for the leg of track leading into this station. */
-  leg?: string;
+  /** Note on the transition into this role. */
+  transition?: string;
 };
 
-export const stations: Station[] = [
+export const stops: Stop[] = [
   {
-    id: "sylhet",
+    id: "leading-university",
     code: "SYL",
     number: "01",
-    name: "Sylhet Central",
-    operator: "Leading University",
+    name: "Leading University",
     kind: "Education",
     role: "B.Sc. in Computer Science & Engineering",
     period: "Jan 2019 – Dec 2022",
     place: "Sylhet, Bangladesh",
     color: "#f5a524",
-    announcement:
-      "Where the main line begins — four years of fundamentals, contests, bootcamps and teaching, with wonderful friends and teachers.",
+    summary:
+      "Four years of computer-science fundamentals, competitive programming, teaching and student leadership.",
     highlights: [
       "Graduated with a CGPA of 3.74 / 4.00.",
-      "Took up competitive programming, won university contests, and represented the university at national level (ICPC Dhaka Regional 2021).",
+      "Took up competitive programming, won university contests and represented the university at national level (ICPC Dhaka Regional 2021).",
       "Teaching Assistant for the Data Structures & Algorithms course.",
-      "Treasurer & Secretary of the IEEE Computer Society LU Student Branch (2021–2023) — launched several programming bootcamps.",
+      "Treasurer and Secretary of the IEEE Computer Society LU Student Branch (2021–2023), launching several programming bootcamps.",
       "Named Best CS Student Volunteer by the IEEE Computer Society Bangladesh Chapter.",
-      "Published a conference paper at IEEE GCAT 2022 while still an undergraduate.",
+      "Published a conference paper at IEEE GCAT 2022 as an undergraduate.",
     ],
     tech: ["C++", "Algorithms", "Data Structures", "OOP"],
     facts: [
@@ -152,24 +161,23 @@ export const stations: Station[] = [
     ],
   },
   {
-    id: "dhaka",
+    id: "inverse-ai",
     code: "DAC",
     number: "02",
-    name: "Dhaka Junction",
-    operator: "Inverse.AI",
-    kind: "Work",
+    name: "Inverse.AI",
+    kind: "Experience",
     role: "Software Engineer",
     period: "Nov 2022 – May 2025",
     place: "Dhaka, Bangladesh",
     color: "#fb7185",
-    announcement:
-      "The busiest stop on the line — four consumer apps, ten million people, and the first lessons in owning a product from the code to the business.",
+    summary:
+      "Four consumer media applications across iOS and Android, with a combined reach of more than ten million users.",
     highlights: [
       "Built low-level C++ components for hardware-accelerated media processing with FFmpeg and Metal.",
       "Increased app revenue by 40% through a UIKit-to-SwiftUI migration and performance work.",
       "Integrated REST APIs, authentication, custom and Firebase Analytics, and owned production releases.",
-      "Collaborated with backend, UI/UX, and QA teams; ran reviews and wrote unit tests and documentation.",
-      "Learned to take ownership of a product end to end — and to think about its business side, not just its code.",
+      "Worked alongside backend, UI/UX and QA teams; ran code reviews and wrote unit tests and documentation.",
+      "Learned to own a product end to end, and to weigh its business impact alongside its implementation.",
       "Recognised with a Certificate of Appreciation.",
     ],
     tech: ["C++", "Swift", "SwiftUI", "UIKit", "Kotlin", "KMM", "FFmpeg", "Metal", "Firebase", "Jira"],
@@ -179,27 +187,26 @@ export const stations: Station[] = [
       { label: "Noise Reducer", value: "10M+ users" },
       { label: "Video Editor · Android", value: "100k+ users" },
     ],
-    leg: "240 km west · a first job, great colleagues, a supportive CEO — and four shipped products",
+    transition: "Sylhet → Dhaka · 2022 — from graduation into a first full-time engineering role",
   },
   {
-    id: "helsinki",
+    id: "university-of-helsinki",
     code: "HEL",
     number: "03",
-    name: "Helsinki Central",
-    operator: "University of Helsinki",
+    name: "University of Helsinki",
     kind: "Education",
     role: "M.Sc. in Computer Science",
     period: "Aug 2025 – July 2027",
     place: "Helsinki, Finland",
     color: "#a78bfa",
-    announcement:
-      "AI was moving fast and it was the right time to learn in that domain — a new country, a full scholarship, and a study track built around scalable systems.",
+    summary:
+      "A fully funded master's on the Software Engineering track — scalable systems, full-stack development and MLOps.",
     highlights: [
       "Awarded a 100% scholarship on academic merit.",
       "Study track: Software Engineering — scalable systems, full-stack development, MLOps.",
-      "Master's thesis interest: applying AI/ML across the stages of the SDLC.",
+      "Master's thesis interest: applying AI/ML across the stages of the software development lifecycle.",
       "Currently holding an average grade of 4.83 / 5.00.",
-      "First thing after landing: the Helsinki Pre-Incubators Builders Track — the startup side has always been there.",
+      "Joined the Helsinki Pre-Incubators Builders Track shortly after arriving, to develop my own product ideas.",
     ],
     tech: ["Scalable Systems", "Full-stack", "MLOps", "Docker", "CI/CD"],
     facts: [
@@ -212,78 +219,61 @@ export const stations: Station[] = [
         href: "https://drive.google.com/file/d/1-Zftq2OOjtt2Adsrwr-HYec5nGbXBtM1/view?usp=sharing",
       },
     ],
-    leg: "6 400 km and one visa later · Dhaka → Helsinki",
+    transition: "Dhaka → Helsinki · 2025 — relocating to Finland on a full scholarship",
   },
   {
-    id: "intex",
+    id: "intexresearch-lab",
     code: "IRL",
     number: "04",
-    name: "Innovation Depot",
-    operator: "IntexResearch Lab",
-    kind: "Work",
+    name: "IntexResearch Lab",
+    kind: "Experience",
     role: "Lead — Innovation & Development Unit",
     period: "Nov 2025 – Present",
-    place: "Part-time",
+    place: "Helsinki, Finland · Part-time",
     color: "#22d3ee",
     current: true,
-    announcement: "Where the trains get built — leading a unit from zero to shipped products.",
+    summary:
+      "Leading a new development unit from formation through to its first shipped in-house and client products.",
     highlights: [
-      "Leading the development unit, launching in-house mobile and web products and initiating client projects within months of formation.",
-      "Designing system architecture and development workflows, and enforcing code quality standards across the team.",
-      "Translating early-stage ideas into production-ready software products.",
-      "Working to bridge the gap between academia and industry in Bangladesh.",
+      "Lead the development unit, launching in-house mobile and web products and initiating client projects within months of its formation.",
+      "Design system architecture and development workflows, and set code quality standards across the team.",
+      "Translate early-stage ideas into production-ready software products.",
+      "Work to bridge the gap between academia and industry in Bangladesh.",
     ],
     tech: ["Flutter", "React", "TypeScript", "Node.js", "REST APIs", "MongoDB", "AI/ML integrations"],
     facts: [
       { label: "Scope", value: "Architecture & delivery" },
-      { label: "Status", value: "Currently leading" },
+      { label: "Status", value: "Current role" },
     ],
-    leg: "Same city, new track · studying by day, building a dev unit alongside it",
+    transition: "Helsinki · 2025 — leading a development unit alongside the master's",
   },
   {
-    id: "ge",
+    id: "ge-healthcare",
     code: "GEH",
     number: "05",
-    name: "Vitals Terminal",
-    operator: "GE HealthCare",
-    kind: "Work",
+    name: "GE HealthCare",
+    kind: "Experience",
     role: "Software Engineer Intern",
     period: "Summer 2026",
     place: "Helsinki, Finland",
     color: "#34d399",
-    announcement: "Patient Care Solutions — software where a bug is not an inconvenience.",
+    summary:
+      "Patient Care Solutions — backend and frontend software for patient monitoring devices, built to medical-industry quality standards.",
     highlights: [
-      "Developed backend and frontend software for patient monitors using C++, Python, and web technologies.",
-      "Delivered robust software meeting medical-industry quality requirements.",
-      "Owned implementation, code reviews, testing, and documentation in a multidisciplinary global Agile team.",
-      "Learning how healthcare software is built inside a large company, alongside generous senior engineers.",
+      "Developed backend and frontend software for patient monitors using C++, Python and web technologies.",
+      "Delivered software meeting medical-industry quality and reliability requirements.",
+      "Owned implementation, code reviews, testing and documentation within a multidisciplinary global Agile team.",
+      "Gained direct experience of how healthcare software is built and validated inside a large organisation.",
     ],
     tech: ["C++", "Python", "Web Technologies", "Git", "Linux", "Agile"],
     facts: [
       { label: "Domain", value: "Patient Monitoring" },
       { label: "Team", value: "Global, multidisciplinary" },
     ],
-    leg: "One stop across town · from building products to building medical devices",
+    transition: "Helsinki · 2026 — from consumer products into medical devices",
   },
 ];
 
-/** Proposed extensions — stops that aren't on the map yet. */
-export const extensions = [
-  {
-    code: "EXT-01",
-    title: "A product of my own",
-    status: "Under construction",
-    text: "The founder itch has always been there. The first thing I did after landing in Finland was join the Helsinki Pre-Incubators Builders Track; right now I'm building out one of my own mobile app ideas.",
-  },
-  {
-    code: "EXT-02",
-    title: "A school in Bangladesh",
-    status: "Planned",
-    text: "The dream project: a school back home, to give back to the society I came from. I truly believe a quality education can change a person's life — and the students who pass through it would carry the legacy on.",
-  },
-] as const;
-
-/** Engine room — the machinery that powers the line. */
 export const skills = [
   {
     group: "Languages",
@@ -309,7 +299,7 @@ export const skills = [
 
 export const competitive = {
   intro:
-    "2000+ problems solved across judges — a decade-long habit of treating algorithms as a craft.",
+    "More than 2,000 problems solved across competitive programming judges, alongside national and international contest results.",
   achievements: [
     { title: "IEEEXtreme 15.0", detail: "Country Rank 7 · Global Rank 390" },
     { title: "ICPC Dhaka Regional 2021", detail: "Participant" },
@@ -352,14 +342,30 @@ export const languages = [
   { name: "Bangla", level: "Native" },
 ] as const;
 
-/** Every stop on the line, in scroll order — drives the nav and the rail map. */
+/** Current and longer-term goals. */
+export const roadmap = [
+  {
+    code: "01",
+    title: "Building a product of my own",
+    status: "In progress",
+    text: "The entrepreneurial side has always been there. The first thing I did after arriving in Finland was join the Helsinki Pre-Incubators Builders Track, and I'm currently developing one of my own mobile application ideas.",
+  },
+  {
+    code: "02",
+    title: "Founding a school in Bangladesh",
+    status: "Long term",
+    text: "My long-term goal is to establish a school back home, to give back to the community I came from. I believe quality education changes the course of a person's life, and its students would carry that forward.",
+  },
+] as const;
+
+/** Every section in scroll order — drives the navigation and the route map. */
 export const route = [
-  { id: "departures", label: "Departures", short: "Dep." },
-  { id: "driver", label: "Your driver", short: "Driver" },
-  { id: "origin", label: "Branch line", short: "Org." },
-  ...stations.map((s) => ({ id: s.id, label: s.name, short: s.code })),
-  { id: "engine-room", label: "Engine room", short: "Eng." },
-  { id: "observation-car", label: "Observation car", short: "Obs." },
-  { id: "extensions", label: "Next stops", short: "Ext." },
-  { id: "final-stop", label: "Final stop", short: "End" },
+  { id: "top", label: "Overview", short: "00" },
+  { id: "about", label: "About", short: "01" },
+  { id: "background", label: "Background", short: "02" },
+  ...stops.map((s) => ({ id: s.id, label: s.name, short: s.code })),
+  { id: "skills", label: "Technical skills", short: "03" },
+  { id: "achievements", label: "Achievements", short: "04" },
+  { id: "roadmap", label: "What's next", short: "05" },
+  { id: "contact", label: "Contact", short: "06" },
 ] as const;

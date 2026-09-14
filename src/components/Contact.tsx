@@ -1,31 +1,28 @@
-import { profile, socials } from "@/content/site";
+import { journey, profile, socials } from "@/content/site";
 import Reveal from "./Reveal";
 import TrainIcon from "./TrainIcon";
 
-export default function FinalStop() {
+export default function Contact() {
   return (
-    <section id="final-stop" className="shell scroll-mt-24 py-16 md:py-24">
+    <section id="contact" className="shell scroll-mt-24 py-16 md:py-24">
       <Reveal>
         <div className="mb-9 md:mb-12">
           <span
             className="inline-flex items-center gap-2 rounded-md border px-2.5 py-1 font-mono text-[0.65rem] tracking-[0.18em] uppercase"
             style={{ borderColor: "var(--brand)", color: "var(--brand)" }}
           >
-            Final stop · Ticket office
+            Contact
           </span>
-          <h2 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">
-            Want to ride the next leg with me?
-          </h2>
+          <h2 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">Get in touch</h2>
           <p className="mt-3 max-w-2xl text-[0.95rem] leading-relaxed text-muted">
-            I&apos;m open to graduate software engineering roles and interesting collaborations.
-            Take the ticket — email is the fastest track.
+            I&apos;m open to graduate software engineering roles and to collaborating on
+            interesting problems. Email is the fastest way to reach me.
           </p>
         </div>
       </Reveal>
 
       <Reveal delay={80}>
         <div className="pass shadow-card grid overflow-hidden md:grid-cols-[1fr_15rem]">
-          {/* Main ticket */}
           <div className="relative px-6 py-8 md:px-9 md:py-10">
             <div
               className="glow-orb pointer-events-none absolute -bottom-24 -left-16 h-72 w-72"
@@ -36,37 +33,50 @@ export default function FinalStop() {
               <div className="flex items-center justify-between gap-4">
                 <span className="inline-flex items-center gap-2 font-mono text-[0.65rem] tracking-[0.2em] text-faint uppercase">
                   <TrainIcon size={14} className="text-brand" />
-                  {profile.lineName}
+                  {profile.name}
                 </span>
-                <span className="font-mono text-[0.65rem] text-faint">ONE-WAY · OPEN RETURN</span>
+                <span className="font-mono text-[0.65rem] text-faint">{journey.years}</span>
               </div>
 
               <div className="mt-7 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
                 <div>
-                  <p className="font-mono text-[0.6rem] tracking-[0.18em] text-faint uppercase">From</p>
-                  <p className="mt-1 font-mono text-xl font-semibold tracking-tight md:text-2xl">SYL</p>
-                  <p className="text-[0.68rem] text-faint">Sylhet · 2019</p>
+                  <p className="font-mono text-[0.6rem] tracking-[0.18em] text-faint uppercase">
+                    Started
+                  </p>
+                  <p className="mt-1 font-mono text-xl font-semibold tracking-tight md:text-2xl">
+                    {journey.from.code}
+                  </p>
+                  <p className="text-[0.68rem] text-faint">{journey.from.label}</p>
                 </div>
 
                 <div className="flex flex-col items-center gap-1.5 px-2">
                   <TrainIcon size={18} className="text-brand" />
-                  <span className="h-[2px] w-16 md:w-24" style={{ background: "var(--rail)" }} aria-hidden="true" />
-                  <span className="font-mono text-[0.58rem] text-faint">7 YRS</span>
+                  <span
+                    className="h-[2px] w-16 md:w-24"
+                    style={{ background: "var(--rail)" }}
+                    aria-hidden="true"
+                  />
+                  <span className="font-mono text-[0.58rem] text-faint">{journey.span}</span>
                 </div>
 
                 <div className="text-right">
-                  <p className="font-mono text-[0.6rem] tracking-[0.18em] text-faint uppercase">To</p>
-                  <p className="mt-1 font-mono text-xl font-semibold tracking-tight md:text-2xl" style={{ color: "var(--brand)" }}>
-                    HEL
+                  <p className="font-mono text-[0.6rem] tracking-[0.18em] text-faint uppercase">
+                    Currently
                   </p>
-                  <p className="text-[0.68rem] text-faint">Helsinki · now</p>
+                  <p
+                    className="mt-1 font-mono text-xl font-semibold tracking-tight md:text-2xl"
+                    style={{ color: "var(--brand)" }}
+                  >
+                    {journey.to.code}
+                  </p>
+                  <p className="text-[0.68rem] text-faint">{journey.to.label}</p>
                 </div>
               </div>
 
               <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-line pt-6 sm:grid-cols-3">
-                <Field label="Passenger" value={profile.name} />
-                <Field label="Class" value="Software Engineer" />
-                <Field label="Status" value="Open to offers" />
+                <Field label="Name" value={profile.name} />
+                <Field label="Role" value={profile.role} />
+                <Field label="Availability" value="Open to offers" />
               </dl>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -105,7 +115,6 @@ export default function FinalStop() {
               className="perforation absolute inset-x-0 top-0 h-px md:inset-y-0 md:left-0 md:h-auto md:w-px"
               aria-hidden="true"
             />
-            {/* Notches cut into either end of the seam */}
             <span
               className="absolute top-0 -left-2 h-4 w-4 -translate-y-1/2 rounded-full border md:-top-2 md:left-0 md:-translate-x-1/2 md:translate-y-0"
               style={{ background: "var(--bg)", borderColor: "var(--line-strong)" }}
@@ -117,19 +126,17 @@ export default function FinalStop() {
               aria-hidden="true"
             />
             <span className="stamp absolute top-5 right-5" aria-hidden="true">
-              Valid · all zones
+              Available 2027
             </span>
 
             <div className="flex h-full flex-col justify-between gap-6 px-6 py-8 md:px-7">
-              <div>
-                <p className="font-mono text-[0.6rem] tracking-[0.18em] text-faint uppercase">Seat</p>
-                <p className="mt-1 font-mono text-lg font-semibold">01A</p>
-                <p className="mt-4 font-mono text-[0.6rem] tracking-[0.18em] text-faint uppercase">
+              <div className="mt-16 md:mt-20">
+                <p className="font-mono text-[0.6rem] tracking-[0.18em] text-faint uppercase">
                   Based in
                 </p>
                 <p className="mt-1 text-sm">{profile.location}</p>
                 <p className="mt-4 font-mono text-[0.6rem] tracking-[0.18em] text-faint uppercase">
-                  Direct line
+                  Phone
                 </p>
                 <p className="mt-1 font-mono text-xs text-muted">{profile.phone}</p>
               </div>
@@ -166,7 +173,9 @@ function Barcode() {
           />
         ))}
       </div>
-      <p className="mt-2 font-mono text-[0.58rem] tracking-[0.2em] text-faint">HRIDOY · 2019—∞</p>
+      <p className="mt-2 font-mono text-[0.58rem] tracking-[0.2em] text-faint">
+        HRIDOY CHOWDHURY
+      </p>
     </div>
   );
 }

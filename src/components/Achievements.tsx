@@ -1,20 +1,20 @@
 import { certifications, competitive, research } from "@/content/site";
-import Platform from "./Platform";
 import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 
-export default function ObservationCar() {
+export default function Achievements() {
   return (
-    <Platform
-      id="observation-car"
-      sign="Carriage 03 · Observation car"
-      title="Trophies, papers and side quests"
+    <SectionHeader
+      id="achievements"
+      eyebrow="Recognition"
+      title="Achievements & research"
       lead={competitive.intro}
     >
       <div className="grid gap-4 md:grid-cols-3">
         {competitive.achievements.map((item, i) => (
           <Reveal key={item.title} delay={i * 45}>
             <div className="card card-hover h-full p-5">
-              <h3 className="text-sm font-medium leading-snug">{item.title}</h3>
+              <h3 className="text-sm leading-snug font-medium">{item.title}</h3>
               <p className="mt-1.5 font-mono text-xs text-brand">{item.detail}</p>
             </div>
           </Reveal>
@@ -32,7 +32,7 @@ export default function ObservationCar() {
             {research.map((item, i) => (
               <Reveal key={item.title} delay={i * 55} as="li">
                 <span className="chip font-mono">{item.type}</span>
-                <h4 className="mt-2.5 text-sm font-medium leading-relaxed">{item.title}</h4>
+                <h4 className="mt-2.5 text-sm leading-relaxed font-medium">{item.title}</h4>
                 <p className="mt-1 text-xs text-faint">{item.venue}</p>
                 {"href" in item && item.href ? (
                   <a
@@ -67,6 +67,6 @@ export default function ObservationCar() {
           </ul>
         </div>
       </div>
-    </Platform>
+    </SectionHeader>
   );
 }

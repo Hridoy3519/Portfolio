@@ -9,7 +9,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [approaching, setApproaching] = useState<string>(route[0].label);
+  const [current, setCurrent] = useState<string>(route[0].label);
   const frame = useRef<number | null>(null);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function Nav() {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (visible) setApproaching(labels.get(visible.target.id) ?? "");
+        if (visible) setCurrent(labels.get(visible.target.id) ?? "");
       },
       { rootMargin: "-18% 0px -60% 0px", threshold: 0 },
     );
@@ -74,20 +74,20 @@ export default function Nav() {
       }}
     >
       <nav className="shell flex h-16 items-center justify-between gap-4">
-        <a href="#departures" className="flex items-center gap-2.5 transition hover:text-brand">
+        <a href="#top" className="flex items-center gap-2.5 transition hover:text-brand">
           <TrainIcon size={17} className="text-brand" />
           <span className="font-mono text-sm font-medium tracking-tight">
             {profile.shortName.toLowerCase()}
-            <span className="text-faint">.line</span>
+            <span className="text-faint">.chowdhury</span>
           </span>
         </a>
 
-        {/* Live journey status, in place of a conventional nav list */}
+        {/* Current section, in place of a conventional nav list */}
         <div className="hidden min-w-0 flex-1 items-center justify-center gap-3 md:flex">
           <span className="font-mono text-[0.68rem] tracking-widest text-faint uppercase">
-            Now approaching
+            Viewing
           </span>
-          <span className="truncate font-mono text-xs text-brand">{approaching}</span>
+          <span className="truncate font-mono text-xs text-brand">{current}</span>
         </div>
 
         <div className="flex items-center gap-2">
@@ -98,7 +98,7 @@ export default function Nav() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close route map" : "Open route map"}
+            aria-label={open ? "Close navigation" : "Open navigation"}
             aria-expanded={open}
             className="grid h-9 w-9 place-items-center rounded-lg border border-line bg-subtle text-muted transition hover:text-brand"
           >
@@ -109,7 +109,7 @@ export default function Nav() {
         </div>
       </nav>
 
-      {/* Journey progress rail under the header, with the train riding it */}
+      {/* Scroll progress, with a marker riding it */}
       <div className="relative h-[2px] w-full" style={{ background: "var(--line)" }}>
         <div
           className="h-full transition-[width] duration-150 ease-out"
