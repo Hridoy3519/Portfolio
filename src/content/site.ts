@@ -139,7 +139,7 @@ export const background: {
   values: string[];
 } = {
   lead:
-    "Before the timeline above: where I grew up, and how I arrived at computer science.",
+    "Before any of the above: where I grew up, and how I arrived at computer science.",
   milestones: [
     {
       year: "1999",
@@ -200,8 +200,6 @@ export type Stop = {
   tech: string[];
   facts?: { label: string; value: string }[];
   links?: { label: string; href: string }[];
-  /** Note on the transition into this role. */
-  transition?: string;
 };
 
 export const stops: Stop[] = [
@@ -264,7 +262,6 @@ export const stops: Stop[] = [
       { label: "Noise Reducer", value: "10M+ users" },
       { label: "Video Editor · Android", value: "100k+ users" },
     ],
-    transition: "Sylhet → Dhaka · 2022 — from graduation into a first full-time engineering role",
   },
   {
     id: "university-of-helsinki",
@@ -297,7 +294,6 @@ export const stops: Stop[] = [
         href: "https://drive.google.com/file/d/1-Zftq2OOjtt2Adsrwr-HYec5nGbXBtM1/view?usp=sharing",
       },
     ],
-    transition: "Dhaka → Helsinki · 2025 — relocating to Finland on a full scholarship",
   },
   {
     id: "intexresearch-lab",
@@ -323,7 +319,6 @@ export const stops: Stop[] = [
       { label: "Scope", value: "Architecture & delivery" },
       { label: "Status", value: "Current role" },
     ],
-    transition: "Helsinki · 2025 — leading a development unit alongside the master's",
   },
   {
     id: "ge-healthcare",
@@ -349,7 +344,6 @@ export const stops: Stop[] = [
       { label: "Domain", value: "Patient Monitoring" },
       { label: "Team", value: "Global, multidisciplinary" },
     ],
-    transition: "Helsinki · 2026 — from consumer products into medical devices",
   },
 ];
 
@@ -358,9 +352,10 @@ export const stops: Stop[] = [
  * Listed by id rather than sorted by date, so the emphasis is a deliberate
  * choice — it matches the order of the caption under my name.
  * Any stop missing from this list still appears, at the end.
- * The timeline itself keeps `stops` order, reading forwards through the
- * transitions between roles.
  */
+const byIds = (ids: string[]): Stop[] =>
+  ids.map((id) => stops.find((s) => s.id === id)).filter((s): s is Stop => s !== undefined);
+
 const BOARD_ORDER = [
   "ge-healthcare",
   "university-of-helsinki",
@@ -370,11 +365,19 @@ const BOARD_ORDER = [
 ];
 
 export const boardStops: Stop[] = [
-  ...BOARD_ORDER.map((id) => stops.find((s) => s.id === id)).filter(
-    (s): s is Stop => s !== undefined,
-  ),
+  ...byIds(BOARD_ORDER),
   ...stops.filter((s) => !BOARD_ORDER.includes(s.id)),
 ];
+
+/** Work history, reverse-chronological — the order a recruiter expects. */
+export const experience = byIds([
+  "ge-healthcare",
+  "intexresearch-lab",
+  "inverse-ai",
+]);
+
+/** Degrees, most recent first. */
+export const education = byIds(["university-of-helsinki", "leading-university"]);
 
 export const skills = [
   {
@@ -463,7 +466,8 @@ export const roadmap = [
 /** Every section in scroll order — drives the navigation and the route map. */
 export const route = [
   { id: "top", label: "Overview", short: "00" },
-  ...stops.map((s) => ({ id: s.id, label: s.name, short: s.code })),
+  ...experience.map((s) => ({ id: s.id, label: s.name, short: s.code })),
+  ...education.map((s) => ({ id: s.id, label: s.name, short: s.code })),
   { id: "skills", label: "Technical skills", short: "01" },
   { id: "achievements", label: "Achievements", short: "02" },
   { id: "background", label: "Background", short: "03" },

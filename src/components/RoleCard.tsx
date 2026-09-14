@@ -1,59 +1,13 @@
-import { type Stop, stops } from "@/content/site";
+import type { Stop } from "@/content/site";
 import Reveal from "./Reveal";
-import TrainIcon from "./TrainIcon";
 
-export default function Timeline() {
-  return (
-    <div id="timeline" className="shell scroll-mt-24 py-4">
-      {stops.map((stop, i) => (
-        <div key={stop.id}>
-          {stop.transition ? <Transition text={stop.transition} /> : null}
-          <StopCard stop={stop} isLast={i === stops.length - 1} />
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/**
- * The move from one role to the next. A marker travels down the track the
- * first time it scrolls into view, and a note records the transition.
- */
-function Transition({ text }: { text: string }) {
-  return (
-    <Reveal>
-      <div className="flex flex-col items-center py-6 md:py-8">
-        <div className="relative h-36 w-6 md:h-44" aria-hidden="true">
-          <span className="absolute inset-y-0 left-[5px] w-[2px]" style={{ background: "var(--rail)" }} />
-          <span className="absolute inset-y-0 right-[5px] w-[2px]" style={{ background: "var(--rail)" }} />
-          <span className="track-ties-v absolute inset-0 opacity-70" />
-
-          <span
-            className="leg-train grid h-7 w-7 place-items-center rounded-full border shadow-card"
-            style={{
-              background: "var(--bg-elev)",
-              borderColor: "var(--brand)",
-              color: "var(--brand)",
-            }}
-          >
-            <TrainIcon size={14} />
-          </span>
-        </div>
-
-        <p className="mt-4 max-w-md rounded-md border border-line bg-elev px-3 py-1.5 text-center font-mono text-[0.66rem] leading-relaxed text-faint">
-          {text}
-        </p>
-      </div>
-    </Reveal>
-  );
-}
-
-function StopCard({ stop, isLast }: { stop: Stop; isLast: boolean }) {
+/** One role or degree. Shared by the Experience and Education sections. */
+export default function RoleCard({ stop }: { stop: Stop }) {
   return (
     <Reveal>
       <article
         id={stop.id}
-        className="card card-hover group relative scroll-mt-24 overflow-hidden"
+        className="card card-hover group relative scroll-mt-44 overflow-hidden"
         style={{ borderTop: `3px solid ${stop.color}` }}
       >
         {/* Ambient light in the stop's colour */}
@@ -184,20 +138,6 @@ function StopCard({ stop, isLast }: { stop: Stop; isLast: boolean }) {
             </div>
           ) : null}
         </div>
-
-        {!isLast ? null : (
-          <footer
-            className="relative border-t border-line px-6 py-3.5 md:px-8"
-            style={{ background: "var(--bg-subtle)" }}
-          >
-            <p className="font-mono text-[0.65rem] tracking-wide text-faint uppercase">
-              Most recent role —{" "}
-              <a href="#roadmap" className="link-underline hover:text-brand">
-                see what&apos;s next below
-              </a>
-            </p>
-          </footer>
-        )}
       </article>
     </Reveal>
   );

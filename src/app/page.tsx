@@ -1,13 +1,14 @@
 import Achievements from "@/components/Achievements";
 import Background from "@/components/Background";
 import Contact from "@/components/Contact";
+import Education from "@/components/Education";
+import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import Overview from "@/components/Overview";
 import Roadmap from "@/components/Roadmap";
 import RouteMap from "@/components/RouteMap";
 import Skills from "@/components/Skills";
-import Timeline from "@/components/Timeline";
 import { profile, socials, stops } from "@/content/site";
 
 /** Structured data so search engines and AI crawlers read the résumé correctly. */
@@ -38,13 +39,14 @@ export default function Home() {
       <Nav />
       <RouteMap />
       {/*
-        Evidence first: a recruiter arriving from the board wants to know what
-        I've shipped, so the timeline follows it directly. The personal
+        Experience first: a recruiter arriving from the board wants to know what
+        I've shipped. Education follows as the qualifier, and the personal
         background sits after the credentials, for readers who want it.
       */}
       <main>
         <Overview />
-        <Timeline />
+        <Experience />
+        <Education />
         <Skills />
         <Achievements />
         <Background />

@@ -61,7 +61,9 @@ body {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  /* `clip` rather than `hidden`: hidden makes body a scroll container, which
+     silently breaks position: sticky for every descendant. */
+  overflow-x: clip;
 }
 
 /* Film grain over the whole page — lifts flat dark surfaces without adding colour */
