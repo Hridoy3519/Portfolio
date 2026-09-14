@@ -14,7 +14,12 @@ export const profile = {
   phone: "+358 41 326 6280",
   // Replace with your deployed domain once live — used for SEO + OG tags.
   siteUrl: "https://hridoychowdhury.com",
-  availability: "Open to 2027 graduate software engineering roles",
+  availability: "Open to software engineering roles",
+  /**
+   * Link to the CV. Leave empty and the board simply omits the entry —
+   * better an absent link than a broken one.
+   */
+  cvUrl: "",
   /** Plain-text version of the headline, used for metadata and screen readers. */
   headline:
     "Software Engineer Intern at GE HealthCare and Computer Science Master's student at the University of Helsinki",
@@ -40,12 +45,23 @@ export const socials = [
  * arriving with no attribution reads as a boast. This answers what those
  * figures can't — whether someone can hire me, and when.
  */
-export const serviceInfo = [
-  { label: "Available from", value: "Summer 2027" },
+export const serviceInfo: {
+  label: string;
+  value: string;
+  /** When set, the entry renders as a link. */
+  href?: string;
+}[] = [
   { label: "Graduating", value: "July 2027, Helsinki" },
-  { label: "Languages", value: "English C1 · Finnish · Bangla" },
+  {
+    label: "Languages",
+    value: "English (Fluent) · Finnish (Basic) · Bangla (Native)",
+  },
   { label: "Focus", value: "Full-stack · Systems · Mobile" },
-] as const;
+  // Appears only once profile.cvUrl is set, so no broken link can ship.
+  ...(profile.cvUrl
+    ? [{ label: "Curriculum vitae", value: "Download PDF ↗", href: profile.cvUrl }]
+    : []),
+];
 
 /**
  * Cycled on the split-flap display at the top of the board.

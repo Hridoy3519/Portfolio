@@ -153,7 +153,19 @@ export default function Overview() {
                       {item.label}
                     </dt>
                     <dd className="mt-1.5 text-[0.8rem] leading-snug text-white/75">
-                      {item.value}
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="link-underline transition-colors"
+                          style={{ color: "var(--board-ink)" }}
+                        >
+                          {item.value}
+                        </a>
+                      ) : (
+                        item.value
+                      )}
                     </dd>
                   </div>
                 ))}
