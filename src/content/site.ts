@@ -21,9 +21,9 @@ export const profile = {
   tagline:
     "Software engineer with production experience across consumer mobile, low-level media systems and medical devices — building software used by millions.",
   about: [
-    "I'm a Computer Science Master's student at the University of Helsinki and a software engineer with production experience across mobile, backend and low-level systems.",
-    "At Inverse.AI I shipped hardware-accelerated media applications used by more than ten million people. At GE HealthCare I built software for patient monitoring devices, where correctness is a regulatory requirement. I currently lead the Innovation & Development unit at IntexResearch Lab, taking early-stage ideas through to shipped products.",
-    "I care about clean architecture, measurable impact, and software that holds up under real users.",
+    "I'm a second-year Master's student in Computer Science at the University of Helsinki, currently doing a software engineering internship at GE HealthCare — writing software for patient monitoring devices, where correctness is a regulatory requirement rather than a preference.",
+    "Before Helsinki I spent two and a half years at Inverse.AI building consumer media apps that reached more than ten million people. I enjoy working on products that people actually use, and I do my best work as part of a team.",
+    "Alongside my studies I lead the Innovation & Development unit at IntexResearch Lab. Longer term, my ambition is entrepreneurship — building something of my own.",
   ],
 } as const;
 
