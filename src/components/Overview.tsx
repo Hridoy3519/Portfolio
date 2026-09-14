@@ -81,12 +81,11 @@ export default function Overview() {
 
             <div className="px-4 py-3 md:px-6 md:py-4">
               <div
-                className="mb-2 hidden grid-cols-[10rem_1fr_4rem_7rem] gap-4 border-b pb-2 font-mono text-[0.65rem] tracking-widest text-white/35 uppercase md:grid"
+                className="mb-2 hidden grid-cols-[10rem_1fr_7rem] gap-4 border-b pb-2 font-mono text-[0.65rem] tracking-widest text-white/35 uppercase md:grid"
                 style={{ borderColor: "rgba(255,255,255,0.08)" }}
               >
                 <span>Period</span>
                 <span>Organisation</span>
-                <span>No.</span>
                 <span className="text-right">Status</span>
               </div>
 
@@ -95,7 +94,7 @@ export default function Overview() {
                   <li key={stop.id}>
                     <a
                       href={`#${stop.id}`}
-                      className="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-1 rounded-md px-1 py-3 transition-colors hover:bg-white/[0.04] md:grid-cols-[10rem_1fr_4rem_7rem] md:items-center md:gap-y-0 md:py-2.5"
+                      className="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-1 rounded-md px-1 py-3 transition-colors hover:bg-white/[0.04] md:grid-cols-[10rem_1fr_7rem] md:items-center md:gap-y-0 md:py-2.5"
                     >
                       {/* On phones the name/role column spans both rows, so the
                           period and status stack flush against the right edge. */}
@@ -121,11 +120,7 @@ export default function Overview() {
                         </span>
                       </span>
 
-                      <span className="order-4 hidden font-mono text-xs text-white/40 md:order-3 md:block">
-                        {stop.number}
-                      </span>
-
-                      <span className="order-3 col-start-2 justify-self-end md:order-4 md:col-start-auto md:text-right">
+                      <span className="order-3 col-start-2 justify-self-end md:order-3 md:col-start-auto md:text-right">
                         <span
                           className="font-mono text-[0.68rem] tracking-wide uppercase"
                           style={{
