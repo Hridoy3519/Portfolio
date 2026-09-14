@@ -42,8 +42,25 @@ export const stats = [
   { value: "4", label: "Cities lived and worked in" },
 ] as const;
 
-/** Cities, cycled on the split-flap display. */
-export const cities = ["Moulvibazar", "Sylhet", "Dhaka", "Helsinki"] as const;
+/**
+ * Cycled on the split-flap display at the top of the board.
+ * Every value is stated in full somewhere else on the page — this is the
+ * highlight reel, not the source. Keep values at 16 characters or fewer so
+ * the row of flaps still fits a phone screen.
+ */
+export const highlights = [
+  { label: "Based in", value: "Helsinki" },
+  { label: "Interning at", value: "GE HealthCare" },
+  { label: "Master's in", value: "Computer Science" },
+  { label: "Scholarship", value: "100% merit-based" },
+  { label: "Average grade", value: "4.83 / 5.00" },
+  { label: "Apps used by", value: "10M+ people" },
+  { label: "Revenue lift", value: "40%" },
+  { label: "LeetCode", value: "Top 2.82%" },
+  { label: "IEEEXtreme 15.0", value: "Global rank 390" },
+  { label: "Published", value: "IEEE GCAT 2022" },
+  { label: "Problems solved", value: "2000+" },
+] as const;
 
 /**
  * What I'm doing right now — the headline under my name.

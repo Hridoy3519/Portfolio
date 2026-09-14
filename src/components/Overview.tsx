@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { boardStops, cities, currentRoles, profile, stats } from "@/content/site";
+import { boardStops, currentRoles, highlights, profile, stats } from "@/content/site";
 import CountUp from "./CountUp";
 import Reveal from "./Reveal";
 import SplitFlap from "./SplitFlap";
@@ -233,12 +233,11 @@ function BoardHeader() {
       className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 border-b px-4 py-3.5 md:px-6"
       style={{ borderColor: "rgba(255,255,255,0.08)" }}
     >
-      <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1.5">
-        <span className="font-mono text-[0.65rem] tracking-[0.2em] whitespace-nowrap text-white/35 uppercase">
-          Lived in
-        </span>
-        <SplitFlap words={cities} className="flap font-mono text-sm font-semibold sm:text-base md:text-lg" />
-      </div>
+      <SplitFlap
+        items={highlights}
+        labelClassName="shrink-0 font-mono text-[0.65rem] tracking-[0.2em] whitespace-nowrap text-white/35 uppercase md:min-w-[8.5rem] md:text-right"
+        className="flap font-mono text-sm font-semibold sm:text-base"
+      />
       <span className="font-mono text-xs text-white/35 tabular-nums">
         Helsinki · {clock ?? "--:--"}
       </span>
