@@ -16,10 +16,17 @@ export const profile = {
   siteUrl: "https://hridoychowdhury.com",
   availability: "Open to software engineering roles",
   /**
-   * Link to the CV. Leave empty and the board simply omits the entry —
+   * Served from public/cv.pdf. Leave empty and the board omits the entry —
    * better an absent link than a broken one.
    */
-  cvUrl: "",
+  cvUrl: "/cv.pdf",
+  /**
+   * Right-to-work status, e.g. "Finnish residence permit — no sponsorship
+   * needed". Left empty until confirmed: this is the first thing a recruiter
+   * checks, so a guess here would be worse than saying nothing. The entry is
+   * omitted while this is empty.
+   */
+  workAuthorisation: "",
   /** Plain-text version of the headline, used for metadata and screen readers. */
   headline:
     "Software Engineer Intern at GE HealthCare and Computer Science Master's student at the University of Helsinki",
@@ -50,8 +57,13 @@ export const serviceInfo: {
   value: string;
   /** When set, the entry renders as a link. */
   href?: string;
+  /** Filename the browser saves the linked file as. */
+  download?: string;
 }[] = [
   { label: "Graduating", value: "July 2027, Helsinki" },
+  ...(profile.workAuthorisation
+    ? [{ label: "Right to work", value: profile.workAuthorisation }]
+    : []),
   {
     label: "Languages",
     value: "English (Fluent) · Finnish (Basic) · Bangla (Native)",
@@ -59,7 +71,14 @@ export const serviceInfo: {
   { label: "Focus", value: "Full-stack · Systems · Mobile" },
   // Appears only once profile.cvUrl is set, so no broken link can ship.
   ...(profile.cvUrl
-    ? [{ label: "Curriculum vitae", value: "Download PDF ↗", href: profile.cvUrl }]
+    ? [
+        {
+          label: "Curriculum vitae",
+          value: "Download PDF ↓",
+          href: profile.cvUrl,
+          download: "Md-Hridoy-Chowdhury-CV.pdf",
+        },
+      ]
     : []),
 ];
 

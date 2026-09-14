@@ -156,7 +156,8 @@ export default function Overview() {
                       {item.href ? (
                         <a
                           href={item.href}
-                          target="_blank"
+                          download={item.download}
+                          target={item.download ? undefined : "_blank"}
                           rel="noreferrer"
                           className="link-underline transition-colors"
                           style={{ color: "var(--board-ink)" }}
