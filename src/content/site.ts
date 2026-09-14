@@ -34,12 +34,17 @@ export const socials = [
   { label: "Email", href: `mailto:${profile.email}`, handle: profile.email },
 ] as const;
 
-/** Headline figures, shown as summary metrics under the timetable. */
-export const stats = [
-  { value: "10M+", label: "Users reached by shipped apps" },
-  { value: "40%", label: "Revenue increase from one migration" },
-  { value: "2000+", label: "Algorithm problems solved" },
-  { value: "4", label: "Cities lived and worked in" },
+/**
+ * Practical notices under the timetable. Deliberately not figures: the
+ * split-flap above already cycles 10M+, 40% and the rest, and a number
+ * arriving with no attribution reads as a boast. This answers what those
+ * figures can't — whether someone can hire me, and when.
+ */
+export const serviceInfo = [
+  { label: "Available from", value: "Summer 2027" },
+  { label: "Graduating", value: "July 2027, Helsinki" },
+  { label: "Languages", value: "English C1 · Finnish · Bangla" },
+  { label: "Focus", value: "Full-stack · Systems · Mobile" },
 ] as const;
 
 /**

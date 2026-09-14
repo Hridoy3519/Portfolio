@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { boardStops, currentRoles, highlights, profile, stats } from "@/content/site";
-import CountUp from "./CountUp";
+import { boardStops, currentRoles, highlights, profile, serviceInfo } from "@/content/site";
 import Reveal from "./Reveal";
 import SplitFlap from "./SplitFlap";
 import TrainIcon from "./TrainIcon";
@@ -142,15 +141,20 @@ export default function Overview() {
               </ul>
             </div>
 
-            {/* Summary metrics */}
-            <div className="border-t px-4 py-3 md:px-6" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-              <dl className="grid grid-cols-2 gap-x-6 gap-y-3 md:grid-cols-4">
-                {stats.map((stat) => (
-                  <div key={stat.label}>
-                    <dt className="flap font-mono text-lg font-semibold tracking-tight md:text-xl">
-                      <CountUp value={stat.value} />
+            {/* Service information */}
+            <div
+              className="border-t px-4 py-4 md:px-6"
+              style={{ borderColor: "rgba(255,255,255,0.08)" }}
+            >
+              <dl className="grid grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-4">
+                {serviceInfo.map((item) => (
+                  <div key={item.label}>
+                    <dt className="font-mono text-[0.6rem] tracking-[0.18em] text-white/30 uppercase">
+                      {item.label}
                     </dt>
-                    <dd className="mt-0.5 text-[0.68rem] leading-snug text-white/40">{stat.label}</dd>
+                    <dd className="mt-1.5 text-[0.8rem] leading-snug text-white/75">
+                      {item.value}
+                    </dd>
                   </div>
                 ))}
               </dl>
