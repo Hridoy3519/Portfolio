@@ -550,10 +550,12 @@ export const route = [
   { id: "top", label: "Overview", short: "00" },
   ...experience.map((s) => ({ id: s.id, label: s.name, short: s.code })),
   ...education.map((s) => ({ id: s.id, label: s.name, short: s.code })),
-  { id: "projects", label: "Projects", short: "01" },
+  { id: "projects", label: "Projects & research", short: "01" },
   { id: "skills", label: "Technical skills", short: "02" },
   { id: "achievements", label: "Achievements", short: "03" },
-  { id: "background", label: "Background", short: "04" },
-  { id: "roadmap", label: "What's next", short: "05" },
-  { id: "contact", label: "Contact", short: "06" },
+  // Background and "What's next" are hidden — see the commented-out
+  // components in app/page.tsx. Restore both together.
+  // { id: "background", label: "Background", short: "04" },
+  // { id: "roadmap", label: "What's next", short: "05" },
+  { id: "contact", label: "Contact", short: "04" },
 ] as const;
