@@ -21,12 +21,12 @@ export const profile = {
    */
   cvUrl: "/cv.pdf",
   /**
-   * Right-to-work status, e.g. "Finnish residence permit — no sponsorship
-   * needed". Left empty until confirmed: this is the first thing a recruiter
-   * checks, so a guess here would be worse than saying nothing. The entry is
-   * omitted while this is empty.
+   * Right-to-work status. Kept to the plain fact of the permit rather than a
+   * claim about sponsorship: an employer acts on this line, so overstating it
+   * would waste their time and mine. Append the valid-until date when known.
+   * The entry is omitted while this is empty.
    */
-  workAuthorisation: "",
+  workAuthorisation: "Finnish residence permit (type A)",
   /** Plain-text version of the headline, used for metadata and screen readers. */
   headline:
     "Software Engineer Intern at GE HealthCare and Computer Science Master's student at the University of Helsinki",
