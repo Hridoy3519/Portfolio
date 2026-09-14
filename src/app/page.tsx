@@ -6,6 +6,7 @@ import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import Overview from "@/components/Overview";
+import Projects from "@/components/Projects";
 import Roadmap from "@/components/Roadmap";
 import RouteMap from "@/components/RouteMap";
 import Skills from "@/components/Skills";
@@ -47,6 +48,7 @@ export default function Home() {
         <Overview />
         <Experience />
         <Education />
+        <Projects />
         <Skills />
         <Achievements />
         <Background />

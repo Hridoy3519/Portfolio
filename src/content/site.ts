@@ -391,6 +391,59 @@ export const milepost = {
     "6,358 kilometres separate the two universities: Sylhet, Bangladesh and Helsinki, Finland.",
 } as const;
 
+export type Project = {
+  name: string;
+  /** Who it was built for — keeps personal work and employed work distinct. */
+  context: string;
+  summary: string;
+  status: string;
+  tech: string[];
+  color: string;
+  href?: string;
+  linkLabel?: string;
+};
+
+/**
+ * Shipped and in-progress products. The Inverse.AI apps are labelled as such
+ * rather than presented as personal projects — they were built with a team,
+ * and the employment context is what makes the reach credible.
+ */
+export const projects: Project[] = [
+  {
+    name: "Caplar",
+    context: "Personal product",
+    summary:
+      "An accountability app that turns a to-do list into a commitment you can feel. Stake $1–$10 on a task, finish it by the deadline, or forfeit the money. Tasks can be created by talking to an AI chat in plain language.",
+    status: "In development · early access",
+    tech: ["iOS", "AI task parsing", "Voice input", "Real-time sync"],
+    color: "var(--brand)",
+    href: "https://caplar.app/",
+    linkLabel: "caplar.app",
+  },
+  {
+    name: "Video Compressor",
+    context: "At Inverse.AI",
+    summary:
+      "Shrinks video files without visible quality loss, using a hardware-accelerated pipeline built on FFmpeg and Metal.",
+    status: "10M+ downloads · iOS & Android",
+    tech: ["C++", "FFmpeg", "Metal", "Swift"],
+    color: "#fb7185",
+    href: "https://apps.apple.com/app/id1528281985",
+    linkLabel: "App Store",
+  },
+  {
+    name: "Audio Noise Reducer",
+    context: "At Inverse.AI",
+    summary:
+      "Strips background noise from recordings and video audio, and records clean audio directly on device.",
+    status: "10M+ downloads · iOS & Android",
+    tech: ["C++", "Audio DSP", "Swift", "Kotlin"],
+    color: "#fb7185",
+    href: "https://apps.apple.com/app/id1451686645",
+    linkLabel: "App Store",
+  },
+];
+
 export const skills = [
   {
     group: "Languages",
@@ -480,9 +533,10 @@ export const route = [
   { id: "top", label: "Overview", short: "00" },
   ...experience.map((s) => ({ id: s.id, label: s.name, short: s.code })),
   ...education.map((s) => ({ id: s.id, label: s.name, short: s.code })),
-  { id: "skills", label: "Technical skills", short: "01" },
-  { id: "achievements", label: "Achievements", short: "02" },
-  { id: "background", label: "Background", short: "03" },
-  { id: "roadmap", label: "What's next", short: "04" },
-  { id: "contact", label: "Contact", short: "05" },
+  { id: "projects", label: "Projects", short: "01" },
+  { id: "skills", label: "Technical skills", short: "02" },
+  { id: "achievements", label: "Achievements", short: "03" },
+  { id: "background", label: "Background", short: "04" },
+  { id: "roadmap", label: "What's next", short: "05" },
+  { id: "contact", label: "Contact", short: "06" },
 ] as const;
