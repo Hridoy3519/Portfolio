@@ -379,6 +379,18 @@ export const experience = byIds([
 /** Degrees, most recent first. */
 export const education = byIds(["university-of-helsinki", "leading-university"]);
 
+/**
+ * Marker between the two degrees. The distance is the great-circle figure
+ * between Sylhet and Helsinki, not a rounded one — the precision is the point.
+ */
+export const milepost = {
+  distance: "6358",
+  unit: "km",
+  caption: "Sylhet → Helsinki · two degrees, two countries",
+  screenReaderText:
+    "6,358 kilometres separate the two universities: Sylhet, Bangladesh and Helsinki, Finland.",
+} as const;
+
 export const skills = [
   {
     group: "Languages",

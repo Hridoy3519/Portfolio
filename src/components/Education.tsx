@@ -1,4 +1,5 @@
 import { education } from "@/content/site";
+import Milepost from "./Milepost";
 import Reveal from "./Reveal";
 import RoleCard from "./RoleCard";
 
@@ -23,9 +24,13 @@ export default function Education() {
         </div>
       </Reveal>
 
-      <div className="space-y-5">
-        {education.map((stop) => (
-          <RoleCard key={stop.id} stop={stop} />
+      <div>
+        {education.map((stop, i) => (
+          <div key={stop.id}>
+            {/* The milepost stands between the two degrees */}
+            {i > 0 ? <Milepost /> : null}
+            <RoleCard stop={stop} />
+          </div>
         ))}
       </div>
     </section>
