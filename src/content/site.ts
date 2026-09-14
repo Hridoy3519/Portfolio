@@ -302,11 +302,27 @@ export const stops: Stop[] = [
 ];
 
 /**
- * Newest first, for the summary board — a reader scanning it wants the
- * current roles at the top. The timeline itself stays in `stops` order,
- * since it reads forwards through the transitions between roles.
+ * Order for the summary board: current roles first, most recent last.
+ * Listed by id rather than sorted by date, so the emphasis is a deliberate
+ * choice — the master's leads, since it's why I'm in Finland at all.
+ * Any stop missing from this list still appears, at the end.
+ * The timeline itself keeps `stops` order, reading forwards through the
+ * transitions between roles.
  */
-export const stopsByRecency = [...stops].reverse();
+const BOARD_ORDER = [
+  "university-of-helsinki",
+  "ge-healthcare",
+  "intexresearch-lab",
+  "inverse-ai",
+  "leading-university",
+];
+
+export const boardStops: Stop[] = [
+  ...BOARD_ORDER.map((id) => stops.find((s) => s.id === id)).filter(
+    (s): s is Stop => s !== undefined,
+  ),
+  ...stops.filter((s) => !BOARD_ORDER.includes(s.id)),
+];
 
 export const skills = [
   {

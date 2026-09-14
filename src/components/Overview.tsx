@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { cities, currentRoles, profile, stats, stopsByRecency } from "@/content/site";
+import { boardStops, cities, currentRoles, profile, stats } from "@/content/site";
 import CountUp from "./CountUp";
 import Reveal from "./Reveal";
 import SplitFlap from "./SplitFlap";
@@ -92,32 +92,38 @@ export default function Overview() {
               </div>
 
               <ul>
-                {stopsByRecency.map((stop) => (
+                {boardStops.map((stop) => (
                   <li key={stop.id}>
                     <a
                       href={`#${stop.id}`}
-                      className="grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 rounded-md px-1 py-2.5 transition-colors hover:bg-white/[0.04] md:grid-cols-[10rem_1fr_4rem_7rem] md:items-center md:py-2"
+                      className="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-1 rounded-md px-1 py-3 transition-colors hover:bg-white/[0.04] md:grid-cols-[10rem_1fr_4rem_7rem] md:items-center md:gap-y-0 md:py-2.5"
                     >
-                      <span className="order-2 font-mono text-[0.7rem] text-white/40 md:order-1 md:text-xs">
+                      {/* Period drops to its own row on phones */}
+                      <span className="order-3 col-span-2 font-mono text-[0.7rem] text-white/40 md:order-1 md:col-span-1 md:text-xs">
                         {stop.period}
                       </span>
-                      <span className="order-1 flex min-w-0 items-center gap-2.5 md:order-2">
+
+                      <span className="order-1 flex min-w-0 items-start gap-2.5 md:order-2">
                         <span
-                          className="h-2 w-2 shrink-0 rounded-full"
+                          className="mt-[0.4rem] h-2 w-2 shrink-0 rounded-full"
                           style={{ background: stop.color }}
                           aria-hidden="true"
                         />
-                        <span className="truncate text-sm font-medium text-white/90">
-                          {stop.name}
-                        </span>
-                        <span className="hidden truncate font-mono text-xs text-white/35 sm:inline">
-                          {stop.role}
+                        <span className="min-w-0">
+                          <span className="block truncate text-sm font-medium text-white/90">
+                            {stop.name}
+                          </span>
+                          <span className="mt-0.5 block truncate font-mono text-[0.68rem] text-white/40">
+                            {stop.role}
+                          </span>
                         </span>
                       </span>
+
                       <span className="order-4 hidden font-mono text-xs text-white/40 md:order-3 md:block">
                         {stop.number}
                       </span>
-                      <span className="order-3 justify-self-end md:order-4 md:text-right">
+
+                      <span className="order-2 justify-self-end md:order-4 md:text-right">
                         <span
                           className="font-mono text-[0.68rem] tracking-wide uppercase"
                           style={{
