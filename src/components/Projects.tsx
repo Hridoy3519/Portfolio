@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { projects } from "@/content/site";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
@@ -8,9 +9,9 @@ export default function Projects() {
       id="projects"
       eyebrow="Selected work"
       title="Projects"
-      lead="Products I've shipped or am building — one of my own, two from Inverse.AI that reached ten million people each."
+      lead="Products I've shipped or am building — one of my own, three from Inverse.AI."
     >
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {projects.map((project, i) => (
           <Reveal key={project.name} delay={i * 70}>
             <article
@@ -24,14 +25,27 @@ export default function Projects() {
               />
 
               {/* Context above the name, so neither has to wrap around the other */}
-              <div className="relative">
-                <span
-                  className="block font-mono text-[0.58rem] tracking-[0.16em] uppercase"
-                  style={{ color: project.color }}
-                >
-                  {project.context}
-                </span>
-                <h3 className="mt-1 text-lg font-semibold tracking-tight">{project.name}</h3>
+              <div className="relative flex items-start gap-3">
+                {project.icon ? (
+                  <Image
+                    src={project.icon}
+                    alt=""
+                    width={44}
+                    height={44}
+                    className="shrink-0 rounded-[10px] border border-line"
+                  />
+                ) : null}
+                <div className="min-w-0">
+                  <span
+                    className="block font-mono text-[0.58rem] tracking-[0.16em] uppercase"
+                    style={{ color: project.color }}
+                  >
+                    {project.context}
+                  </span>
+                  <h3 className="mt-1 text-[0.98rem] leading-snug font-semibold tracking-tight">
+                    {project.name}
+                  </h3>
+                </div>
               </div>
 
               <p className="relative mt-3 flex-1 text-sm leading-relaxed text-muted">

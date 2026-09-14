@@ -401,6 +401,8 @@ export type Project = {
   color: string;
   href?: string;
   linkLabel?: string;
+  /** Square app icon in public/projects. */
+  icon?: string;
 };
 
 /**
@@ -417,8 +419,21 @@ export const projects: Project[] = [
     status: "In development · early access",
     tech: ["iOS", "AI task parsing", "Voice input", "Real-time sync"],
     color: "var(--brand)",
+    icon: "/projects/caplar.png",
     href: "https://caplar.app/",
     linkLabel: "caplar.app",
+  },
+  {
+    name: "Photo Filters, Effects & Editor",
+    context: "At Inverse.AI",
+    summary:
+      "Filters, AI cutout and blur, double exposure, magic brushes and artistic text — a full editing suite on the phone.",
+    status: "4.9★ on the App Store · iOS",
+    tech: ["Swift", "SwiftUI", "Metal", "Core Image"],
+    color: "#fb7185",
+    icon: "/projects/photo-editor.jpg",
+    href: "https://apps.apple.com/app/id1598843369",
+    linkLabel: "App Store",
   },
   {
     name: "Video Compressor",
@@ -428,6 +443,7 @@ export const projects: Project[] = [
     status: "10M+ downloads · iOS & Android",
     tech: ["C++", "FFmpeg", "Metal", "Swift"],
     color: "#fb7185",
+    icon: "/projects/video-compressor.jpg",
     href: "https://apps.apple.com/app/id1528281985",
     linkLabel: "App Store",
   },
@@ -439,6 +455,7 @@ export const projects: Project[] = [
     status: "10M+ downloads · iOS & Android",
     tech: ["C++", "Audio DSP", "Swift", "Kotlin"],
     color: "#fb7185",
+    icon: "/projects/noise-reducer.jpg",
     href: "https://apps.apple.com/app/id1451686645",
     linkLabel: "App Store",
   },
