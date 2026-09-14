@@ -52,15 +52,15 @@ export const cities = ["Moulvibazar", "Sylhet", "Dhaka", "Helsinki"] as const;
 export const currentRoles = [
   {
     id: "ge-healthcare",
-    kind: "Internship",
-    title: "Software Engineer",
+    icon: "work",
+    title: "Software Engineer Intern",
     org: "GE HealthCare",
     color: "#34d399",
   },
   {
     id: "university-of-helsinki",
-    kind: "Master's",
-    title: "Computer Science",
+    icon: "study",
+    title: "M.Sc. Computer Science",
     org: "University of Helsinki",
     color: "#a78bfa",
   },

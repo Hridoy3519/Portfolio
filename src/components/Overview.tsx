@@ -35,44 +35,35 @@ export default function Overview() {
           </h1>
         </Reveal>
 
-        {/* Current positions — the headline. Plain text for assistive tech,
-            then the same information laid out as two linked plaques. */}
+        {/* Current positions, as a caption under the name. Read as one
+            sentence by assistive tech, shown as an icon row to everyone else. */}
         <Reveal delay={110}>
-          <div className="mt-7">
+          <div className="mt-5">
             <p className="sr-only">{profile.headline}</p>
 
-            <div className="mb-3 flex items-center gap-2.5" aria-hidden="true">
-              <span
-                className="live-dot h-1.5 w-1.5 rounded-full"
-                style={{ background: "var(--brand)" }}
-              />
-              <span className="font-mono text-[0.62rem] tracking-[0.2em] text-faint uppercase">
-                Currently
-              </span>
-              <span className="h-px flex-1 max-w-24" style={{ background: "var(--line)" }} />
-            </div>
+            <ul className="flex flex-wrap items-center gap-x-6 gap-y-2" aria-hidden="true">
+              <li className="flex items-center gap-2">
+                <span
+                  className="live-dot h-1.5 w-1.5 rounded-full"
+                  style={{ background: "var(--brand)" }}
+                />
+                <span className="font-mono text-[0.6rem] tracking-[0.2em] text-faint uppercase">
+                  Currently
+                </span>
+              </li>
 
-            <ul className="grid max-w-2xl gap-3 sm:grid-cols-2" aria-hidden="true">
               {currentRoles.map((role) => (
                 <li key={role.id}>
                   <a
                     href={`#${role.id}`}
-                    className="card card-hover group relative flex h-full flex-col overflow-hidden py-3.5 pr-4 pl-5"
+                    className="group inline-flex items-center gap-2 text-sm md:text-[0.95rem]"
                   >
-                    <span
-                      className="absolute inset-y-0 left-0 w-[3px] transition-[width] duration-300 group-hover:w-[5px]"
-                      style={{ background: role.color }}
-                    />
-                    <span className="font-mono text-[0.58rem] tracking-[0.18em] text-faint uppercase">
-                      {role.kind}
-                    </span>
-                    <span className="mt-1 text-[0.95rem] leading-snug font-semibold tracking-tight">
-                      {role.title}
-                    </span>
-                    <span
-                      className="mt-0.5 text-[0.82rem] leading-snug"
-                      style={{ color: role.color }}
-                    >
+                    <RoleIcon name={role.icon} style={{ color: role.color }} />
+                    <span className="text-muted">
+                      <span className="font-medium text-[var(--text)] transition-colors group-hover:text-brand">
+                        {role.title}
+                      </span>
+                      <span className="text-faint"> · </span>
                       {role.org}
                     </span>
                   </a>
@@ -189,6 +180,38 @@ export default function Overview() {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+/** Small line icon marking what kind of position a caption entry is. */
+function RoleIcon({ name, style }: { name: "work" | "study"; style?: React.CSSProperties }) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="shrink-0"
+      style={style}
+      aria-hidden="true"
+    >
+      {name === "work" ? (
+        <>
+          <rect x="3" y="7" width="18" height="13" rx="2" />
+          <path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7" />
+          <path d="M3 12.5h18" />
+        </>
+      ) : (
+        <>
+          <path d="M12 4 2.5 8.6 12 13.2l9.5-4.6L12 4Z" />
+          <path d="M6.5 10.8v3.9c0 1.2 2.5 2.3 5.5 2.3s5.5-1.1 5.5-2.3v-3.9" />
+        </>
+      )}
+    </svg>
   );
 }
 
