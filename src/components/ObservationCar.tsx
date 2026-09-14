@@ -1,0 +1,72 @@
+import { certifications, competitive, research } from "@/content/site";
+import Platform from "./Platform";
+import Reveal from "./Reveal";
+
+export default function ObservationCar() {
+  return (
+    <Platform
+      id="observation-car"
+      sign="Carriage 03 · Observation car"
+      title="Trophies, papers and side quests"
+      lead={competitive.intro}
+    >
+      <div className="grid gap-4 md:grid-cols-3">
+        {competitive.achievements.map((item, i) => (
+          <Reveal key={item.title} delay={i * 45}>
+            <div className="card card-hover h-full p-5">
+              <h3 className="text-sm font-medium leading-snug">{item.title}</h3>
+              <p className="mt-1.5 font-mono text-xs text-brand">{item.detail}</p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      <div className="mt-14 grid gap-10 md:grid-cols-2 md:gap-14">
+        <div>
+          <Reveal>
+            <h3 className="font-mono text-[0.65rem] tracking-[0.18em] text-faint uppercase">
+              Publication & thesis
+            </h3>
+          </Reveal>
+          <ul className="mt-5 space-y-6">
+            {research.map((item, i) => (
+              <Reveal key={item.title} delay={i * 55} as="li">
+                <span className="chip font-mono">{item.type}</span>
+                <h4 className="mt-2.5 text-sm font-medium leading-relaxed">{item.title}</h4>
+                <p className="mt-1 text-xs text-faint">{item.venue}</p>
+                {"href" in item && item.href ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="link-underline mt-1.5 inline-block font-mono text-xs text-muted hover:text-brand"
+                  >
+                    {item.linkLabel} ↗
+                  </a>
+                ) : null}
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <Reveal>
+            <h3 className="font-mono text-[0.65rem] tracking-[0.18em] text-faint uppercase">
+              Certifications & programs
+            </h3>
+          </Reveal>
+          <ul className="mt-5 space-y-4">
+            {certifications.map((cert, i) => (
+              <Reveal key={cert.title} delay={i * 55} as="li">
+                <div className="border-l-2 pl-4" style={{ borderColor: "var(--line-strong)" }}>
+                  <h4 className="text-sm font-medium">{cert.title}</h4>
+                  <p className="mt-1 text-xs leading-relaxed text-faint">{cert.detail}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </Platform>
+  );
+}

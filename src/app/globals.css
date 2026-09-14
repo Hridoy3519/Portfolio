@@ -1,0 +1,520 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-sg), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #f6f6f9;
+  --bg-elev: #ffffff;
+  --bg-subtle: #eceef4;
+  --board: #14161d;
+  --board-ink: #f7c948;
+  --text: #0d0f14;
+  --text-muted: #545a6b;
+  --text-faint: #838a9c;
+  --line: #e0e3eb;
+  --line-strong: #c8cdda;
+  --brand: #0f9e8c;
+  --rail: #b9bfcd;
+  --glow: rgba(15, 158, 140, 0.14);
+  --grain: 0.035;
+  --shadow: 0 1px 2px rgba(13, 15, 20, 0.05), 0 10px 30px rgba(13, 15, 20, 0.07);
+}
+
+.dark {
+  --bg: #07080b;
+  --bg-elev: #0e1016;
+  --bg-subtle: #14171f;
+  --board: #0a0b0f;
+  --board-ink: #f5c542;
+  --text: #e8eaf0;
+  --text-muted: #98a0b2;
+  --text-faint: #6c7386;
+  --line: #1d212b;
+  --line-strong: #2c3140;
+  --brand: #5eead4;
+  --rail: #333a4a;
+  --glow: rgba(94, 234, 212, 0.13);
+  --grain: 0.055;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 14px 44px rgba(0, 0, 0, 0.5);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  background: var(--bg);
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Film grain over the whole page — lifts flat dark surfaces without adding colour */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+::selection {
+  background: var(--brand);
+  color: var(--bg);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .text-muted {
+    color: var(--text-muted);
+  }
+  .text-faint {
+    color: var(--text-faint);
+  }
+  .text-brand {
+    color: var(--brand);
+  }
+  .bg-elev {
+    background: var(--bg-elev);
+  }
+  .bg-subtle {
+    background: var(--bg-subtle);
+  }
+  .border-line {
+    border-color: var(--line);
+  }
+  .border-line-strong {
+    border-color: var(--line-strong);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow);
+  }
+
+  .shell {
+    width: 100%;
+    max-width: 66rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  .card {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: 0.875rem;
+    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  .card-hover:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    background: var(--bg-subtle);
+    color: var(--text-muted);
+    border-radius: 9999px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.7rem;
+    line-height: 1.2rem;
+    white-space: nowrap;
+    transition: color 180ms ease, border-color 180ms ease;
+  }
+
+  .chip:hover {
+    color: var(--text);
+    border-color: var(--line-strong);
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 260ms ease, color 200ms ease;
+  }
+
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  .glow-orb {
+    background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+  }
+}
+
+/* ---------- Departure board ---------- */
+.board {
+  background: var(--board);
+  border: 1px solid var(--line-strong);
+  border-radius: 1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), var(--shadow);
+}
+
+/* Faint horizontal scanlines, like a real split-flap panel */
+.board-scan {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.035) 0px,
+    rgba(255, 255, 255, 0.035) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
+
+.flap {
+  color: var(--board-ink);
+  text-shadow: 0 0 18px rgba(245, 197, 66, 0.3);
+}
+
+/* ---------- Rail & track ---------- */
+.track-rail {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--rail) 8%,
+    var(--rail) 92%,
+    transparent 100%
+  );
+}
+
+/* Sleepers under a horizontal run of track */
+.track-ties {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--rail) 0px,
+    var(--rail) 2px,
+    transparent 2px,
+    transparent 12px
+  );
+}
+
+/* Sleepers rushing past under a moving train */
+@keyframes ties-run {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -12px;
+  }
+}
+
+.ties-run {
+  animation: ties-run 0.3s linear infinite;
+}
+
+/* Dashed track connecting one station card to the next */
+.track-link {
+  background-image: linear-gradient(
+    to bottom,
+    var(--rail) 0 8px,
+    transparent 8px 16px
+  );
+  background-size: 2px 16px;
+  background-repeat: repeat-y;
+  background-position: center;
+}
+
+/* Sleepers on a vertical run of track */
+.track-ties-v {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--rail) 0 2px,
+    transparent 2px 12px
+  );
+}
+
+/* A small train rides the leg of track once the leg scrolls into view */
+.leg-train {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  translate: -50% 0;
+  opacity: 0;
+}
+
+[data-reveal="shown"] .leg-train {
+  animation: ride-down 1.7s cubic-bezier(0.45, 0, 0.25, 1) 0.2s forwards;
+}
+
+@keyframes ride-down {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  86% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 1.75rem);
+    opacity: 0;
+  }
+}
+
+/* ---------- Hero train ---------- */
+.wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wheel-spin 0.8s linear infinite;
+}
+
+@keyframes wheel-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.train-bob {
+  animation: bob 1.15s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+
+.beam {
+  animation: beam 2.4s ease-in-out infinite;
+}
+
+@keyframes beam {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.blink {
+  animation: blink 1.3s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+/* ---------- Fork diagram draws itself on reveal ---------- */
+.fork-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
+}
+
+.fork-fade {
+  opacity: 0;
+  transition: opacity 0.7s ease 1s;
+}
+
+[data-reveal="shown"] .fork-draw {
+  stroke-dashoffset: 0;
+}
+
+[data-reveal="shown"] .fork-fade {
+  opacity: 1;
+}
+
+/* ---------- Boarding pass ---------- */
+.pass {
+  background: var(--bg-elev);
+  border: 1px solid var(--line-strong);
+  border-radius: 1rem;
+  position: relative;
+}
+
+.perforation {
+  background-image: linear-gradient(
+    to bottom,
+    var(--line-strong) 0 5px,
+    transparent 5px 11px
+  );
+  background-size: 1px 11px;
+  background-repeat: repeat-y;
+}
+
+@media (max-width: 767px) {
+  .perforation {
+    background-image: linear-gradient(
+      to right,
+      var(--line-strong) 0 5px,
+      transparent 5px 11px
+    );
+    background-size: 11px 1px;
+    background-repeat: repeat-x;
+  }
+}
+
+/* Inked rubber stamp on the ticket */
+.stamp {
+  display: inline-block;
+  border: 2px solid var(--brand);
+  outline: 1px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  color: var(--brand);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transform: rotate(-9deg);
+  opacity: 0.75;
+}
+
+/* ---------- Reveal on scroll ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 640ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="shown"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Motion ---------- */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.78);
+  }
+}
+
+.live-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+/* Landscape drifting past the window */
+@keyframes drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.drift-slow {
+  animation: drift 46s linear infinite;
+}
+
+.drift-mid {
+  animation: drift 22s linear infinite;
+}
+
+.drift-fast {
+  animation: drift 19s linear infinite;
+}
+
+.drift-near {
+  animation: drift 7s linear infinite;
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-1.5px) rotate(-0.25deg);
+  }
+}
+
+.sway {
+  animation: sway 3.1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .fork-draw {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+  .fork-fade {
+    opacity: 1;
+    transition: none;
+  }
+  .leg-train,
+  [data-reveal="shown"] .leg-train {
+    animation: none;
+    opacity: 0;
+  }
+  .live-dot,
+  .drift-slow,
+  .drift-mid,
+  .drift-fast,
+  .drift-near,
+  .sway,
+  .wheel,
+  .train-bob,
+  .beam,
+  .blink,
+  .ties-run {
+    animation: none;
+  }
+}
