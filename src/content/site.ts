@@ -18,12 +18,13 @@ export const profile = {
   /** Plain-text version of the headline, used for metadata and screen readers. */
   headline:
     "Software Engineer Intern at GE HealthCare and Computer Science Master's student at the University of Helsinki",
+  /** Short summary under the name — who I am right now, in my own voice. */
   tagline:
-    "Software engineer with production experience across consumer mobile, low-level media systems and medical devices — building software used by millions.",
+    "Second year of my Master's, currently interning at GE HealthCare. I enjoy working on products people actually use, and being part of the team that builds them. Longer term, my ambition is to start something of my own.",
   about: [
-    "I'm a second-year Master's student in Computer Science at the University of Helsinki, currently doing a software engineering internship at GE HealthCare — writing software for patient monitoring devices, where correctness is a regulatory requirement rather than a preference.",
-    "Before Helsinki I spent two and a half years at Inverse.AI building consumer media apps that reached more than ten million people. I enjoy working on products that people actually use, and I do my best work as part of a team.",
-    "Alongside my studies I lead the Innovation & Development unit at IntexResearch Lab. Longer term, my ambition is entrepreneurship — building something of my own.",
+    "Before Helsinki I spent two and a half years at Inverse.AI, working on consumer media apps — a photo editor, a video compressor, a noise reducer — used by more than ten million people between them. Most of that work was on the low-level side: C++ media pipelines built on FFmpeg and Metal, and a UIKit-to-SwiftUI migration that lifted revenue by 40%.",
+    "At GE HealthCare I write software for patient monitors, where correctness is a regulatory requirement rather than a preference. It's a different discipline from consumer apps, and one I've learned a great deal from.",
+    "Alongside my studies I lead the Innovation & Development unit at IntexResearch Lab, taking early-stage ideas through to shipped products. I care about clean architecture, measurable impact, and software that holds up under real users.",
   ],
 } as const;
 
