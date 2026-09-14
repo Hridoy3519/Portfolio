@@ -4,7 +4,7 @@ import TrainIcon from "./TrainIcon";
 
 export default function Timeline() {
   return (
-    <div className="shell py-4">
+    <div id="timeline" className="shell scroll-mt-24 py-4">
       {stops.map((stop, i) => (
         <div key={stop.id}>
           {stop.transition ? <Transition text={stop.transition} /> : null}

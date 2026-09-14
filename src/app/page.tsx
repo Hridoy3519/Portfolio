@@ -1,4 +1,3 @@
-import About from "@/components/About";
 import Achievements from "@/components/Achievements";
 import Background from "@/components/Background";
 import Contact from "@/components/Contact";
@@ -38,13 +37,17 @@ export default function Home() {
       />
       <Nav />
       <RouteMap />
+      {/*
+        Evidence first: a recruiter arriving from the board wants to know what
+        I've shipped, so the timeline follows it directly. The personal
+        background sits after the credentials, for readers who want it.
+      */}
       <main>
         <Overview />
-        <About />
-        <Background />
         <Timeline />
         <Skills />
         <Achievements />
+        <Background />
         <Roadmap />
         <Contact />
       </main>

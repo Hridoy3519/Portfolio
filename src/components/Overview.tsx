@@ -173,7 +173,7 @@ export default function Overview() {
         <Reveal delay={320}>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
-              href="#about"
+              href="#timeline"
               className="group inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium transition hover:opacity-90"
               style={{ background: "var(--brand)", color: "var(--bg)" }}
             >

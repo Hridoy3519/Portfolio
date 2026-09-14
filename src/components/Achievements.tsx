@@ -1,4 +1,4 @@
-import { certifications, competitive, research } from "@/content/site";
+import { certifications, competitive, languages, research } from "@/content/site";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
 
@@ -65,6 +65,20 @@ export default function Achievements() {
               </Reveal>
             ))}
           </ul>
+
+          <Reveal delay={60}>
+            <h3 className="mt-10 font-mono text-[0.65rem] tracking-[0.18em] text-faint uppercase">
+              Languages
+            </h3>
+          </Reveal>
+          <dl className="mt-5 space-y-3">
+            {languages.map((lang, i) => (
+              <Reveal key={lang.name} delay={i * 55}>
+                <dt className="text-sm font-medium">{lang.name}</dt>
+                <dd className="mt-0.5 text-xs leading-relaxed text-faint">{lang.level}</dd>
+              </Reveal>
+            ))}
+          </dl>
         </div>
       </div>
     </SectionHeader>

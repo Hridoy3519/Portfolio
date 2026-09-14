@@ -86,9 +86,9 @@ function Milestones() {
           href="#leading-university"
           className="link-underline mt-8 inline-flex items-center gap-2 font-mono text-xs text-muted hover:text-brand"
         >
-          Timeline continues at Leading University, 2019
+          The timeline picks up at Leading University, 2019
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M12 5v14M6 13l6 6 6-6" />
+            <path d="M12 19V5M6 11l6-6 6 6" />
           </svg>
         </a>
       </Reveal>

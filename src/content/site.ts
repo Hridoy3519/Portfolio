@@ -33,11 +33,6 @@ export const profile = {
   /** Short summary under the name — who I am right now, in my own voice. */
   tagline:
     "Second year of my Master's, currently interning at GE HealthCare. I enjoy working on products people actually use, and being part of the team that builds them. Longer term, my ambition is to start something of my own.",
-  about: [
-    "Before Helsinki I spent two and a half years at Inverse.AI, working on consumer media apps — a photo editor, a video compressor, a noise reducer — used by more than ten million people between them. Most of that work was on the low-level side: C++ media pipelines built on FFmpeg and Metal, and a UIKit-to-SwiftUI migration that lifted revenue by 40%.",
-    "At GE HealthCare I write software for patient monitors, where correctness is a regulatory requirement rather than a preference. It's a different discipline from consumer apps, and one I've learned a great deal from.",
-    "Alongside my studies I lead the Innovation & Development unit at IntexResearch Lab, taking early-stage ideas through to shipped products. I care about clean architecture, measurable impact, and software that holds up under real users.",
-  ],
 } as const;
 
 export const socials = [
@@ -144,7 +139,7 @@ export const background: {
   values: string[];
 } = {
   lead:
-    "Before the timeline below: where I grew up, and how I arrived at computer science.",
+    "Before the timeline above: where I grew up, and how I arrived at computer science.",
   milestones: [
     {
       year: "1999",
@@ -468,11 +463,10 @@ export const roadmap = [
 /** Every section in scroll order — drives the navigation and the route map. */
 export const route = [
   { id: "top", label: "Overview", short: "00" },
-  { id: "about", label: "About", short: "01" },
-  { id: "background", label: "Background", short: "02" },
   ...stops.map((s) => ({ id: s.id, label: s.name, short: s.code })),
-  { id: "skills", label: "Technical skills", short: "03" },
-  { id: "achievements", label: "Achievements", short: "04" },
-  { id: "roadmap", label: "What's next", short: "05" },
-  { id: "contact", label: "Contact", short: "06" },
+  { id: "skills", label: "Technical skills", short: "01" },
+  { id: "achievements", label: "Achievements", short: "02" },
+  { id: "background", label: "Background", short: "03" },
+  { id: "roadmap", label: "What's next", short: "04" },
+  { id: "contact", label: "Contact", short: "05" },
 ] as const;
