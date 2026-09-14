@@ -21,7 +21,7 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
-const description = `${profile.role} in ${profile.location}. ${profile.tagline}`;
+const description = `${profile.headline}. Based in ${profile.location}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),

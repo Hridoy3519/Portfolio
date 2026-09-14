@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { cities, profile, stats, stops } from "@/content/site";
+import { cities, currentRoles, profile, stats, stops } from "@/content/site";
 import CountUp from "./CountUp";
 import Reveal from "./Reveal";
 import SplitFlap from "./SplitFlap";
@@ -35,16 +35,55 @@ export default function Overview() {
           </h1>
         </Reveal>
 
+        {/* Current positions — the headline. Plain text for assistive tech,
+            then the same information laid out as two linked plaques. */}
         <Reveal delay={110}>
-          <p className="mt-4 font-mono text-sm text-muted md:text-base">
-            {profile.role}
-            <span className="text-faint"> · </span>
-            {profile.subRole}, University of Helsinki
-          </p>
+          <div className="mt-7">
+            <p className="sr-only">{profile.headline}</p>
+
+            <div className="mb-3 flex items-center gap-2.5" aria-hidden="true">
+              <span
+                className="live-dot h-1.5 w-1.5 rounded-full"
+                style={{ background: "var(--brand)" }}
+              />
+              <span className="font-mono text-[0.62rem] tracking-[0.2em] text-faint uppercase">
+                Currently
+              </span>
+              <span className="h-px flex-1 max-w-24" style={{ background: "var(--line)" }} />
+            </div>
+
+            <ul className="grid max-w-2xl gap-3 sm:grid-cols-2" aria-hidden="true">
+              {currentRoles.map((role) => (
+                <li key={role.id}>
+                  <a
+                    href={`#${role.id}`}
+                    className="card card-hover group relative flex h-full flex-col overflow-hidden py-3.5 pr-4 pl-5"
+                  >
+                    <span
+                      className="absolute inset-y-0 left-0 w-[3px] transition-[width] duration-300 group-hover:w-[5px]"
+                      style={{ background: role.color }}
+                    />
+                    <span className="font-mono text-[0.58rem] tracking-[0.18em] text-faint uppercase">
+                      {role.kind}
+                    </span>
+                    <span className="mt-1 text-[0.95rem] leading-snug font-semibold tracking-tight">
+                      {role.title}
+                    </span>
+                    <span
+                      className="mt-0.5 text-[0.82rem] leading-snug"
+                      style={{ color: role.color }}
+                    >
+                      {role.org}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Reveal>
 
         <Reveal delay={160}>
-          <p className="mt-6 max-w-xl text-[0.98rem] leading-relaxed text-muted md:text-lg">
+          <p className="mt-7 max-w-xl text-[0.98rem] leading-relaxed text-muted md:text-lg">
             {profile.tagline}
           </p>
         </Reveal>

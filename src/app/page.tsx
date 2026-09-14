@@ -23,10 +23,9 @@ const personSchema = {
   alumniOf: stops
     .filter((s) => s.kind === "Education")
     .map((s) => ({ "@type": "CollegeOrUniversity", name: s.name })),
-  worksFor: {
-    "@type": "Organization",
-    name: stops.find((s) => s.current)?.name ?? "IntexResearch Lab",
-  },
+  worksFor: stops
+    .filter((s) => s.current && s.kind === "Experience")
+    .map((s) => ({ "@type": "Organization", name: s.name })),
   sameAs: socials.filter((s) => !s.href.startsWith("mailto:")).map((s) => s.href),
 };
 

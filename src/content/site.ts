@@ -9,13 +9,15 @@ export const profile = {
   name: "Md Hridoy Chowdhury",
   shortName: "Hridoy",
   role: "Software Engineer",
-  subRole: "Computer Science Master's Student",
   location: "Helsinki, Finland",
   email: "hridoy3519@gmail.com",
   phone: "+358 41 326 6280",
   // Replace with your deployed domain once live — used for SEO + OG tags.
   siteUrl: "https://hridoychowdhury.com",
   availability: "Open to 2027 graduate software engineering roles",
+  /** Plain-text version of the headline, used for metadata and screen readers. */
+  headline:
+    "Software Engineer Intern at GE HealthCare and Computer Science Master's student at the University of Helsinki",
   tagline:
     "Software engineer with production experience across consumer mobile, low-level media systems and medical devices — building software used by millions.",
   about: [
@@ -41,6 +43,28 @@ export const stats = [
 
 /** Cities, cycled on the split-flap display. */
 export const cities = ["Moulvibazar", "Sylhet", "Dhaka", "Helsinki"] as const;
+
+/**
+ * What I'm doing right now — the headline under my name.
+ * Listed explicitly rather than derived, so the order and wording are
+ * controlled here; `id` links each card to its entry in the timeline.
+ */
+export const currentRoles = [
+  {
+    id: "ge-healthcare",
+    kind: "Internship",
+    title: "Software Engineer",
+    org: "GE HealthCare",
+    color: "#34d399",
+  },
+  {
+    id: "university-of-helsinki",
+    kind: "Master's",
+    title: "Computer Science",
+    org: "University of Helsinki",
+    color: "#a78bfa",
+  },
+] as const;
 
 /** Start and present location, summarised on the contact card. */
 export const journey = {
@@ -199,6 +223,7 @@ export const stops: Stop[] = [
     period: "Aug 2025 – July 2027",
     place: "Helsinki, Finland",
     color: "#a78bfa",
+    current: true,
     summary:
       "A fully funded master's on the Software Engineering track — scalable systems, full-stack development and MLOps.",
     highlights: [
@@ -254,16 +279,17 @@ export const stops: Stop[] = [
     name: "GE HealthCare",
     kind: "Experience",
     role: "Software Engineer Intern",
-    period: "Summer 2026",
+    period: "Summer 2026 – Present",
     place: "Helsinki, Finland",
     color: "#34d399",
+    current: true,
     summary:
       "Patient Care Solutions — backend and frontend software for patient monitoring devices, built to medical-industry quality standards.",
     highlights: [
-      "Developed backend and frontend software for patient monitors using C++, Python and web technologies.",
-      "Delivered software meeting medical-industry quality and reliability requirements.",
-      "Owned implementation, code reviews, testing and documentation within a multidisciplinary global Agile team.",
-      "Gained direct experience of how healthcare software is built and validated inside a large organisation.",
+      "Developing backend and frontend software for patient monitors using C++, Python and web technologies.",
+      "Delivering software that meets medical-industry quality and reliability requirements.",
+      "Owning implementation, code reviews, testing and documentation within a multidisciplinary global Agile team.",
+      "Learning first-hand how healthcare software is built and validated inside a large organisation.",
     ],
     tech: ["C++", "Python", "Web Technologies", "Git", "Linux", "Agile"],
     facts: [
