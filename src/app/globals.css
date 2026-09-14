@@ -295,7 +295,8 @@ body::after {
 .wheel {
   transform-box: fill-box;
   transform-origin: center;
-  animation: wheel-spin 0.8s linear infinite;
+  /* Duration is rewritten from JS to track scroll velocity. */
+  animation: wheel-spin var(--wheel-spin, 0.8s) linear infinite;
 }
 
 @keyframes wheel-spin {
