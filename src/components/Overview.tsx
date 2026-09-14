@@ -42,16 +42,6 @@ export default function Overview() {
             <p className="sr-only">{profile.headline}</p>
 
             <ul className="flex flex-wrap items-center gap-x-6 gap-y-2" aria-hidden="true">
-              <li className="flex items-center gap-2">
-                <span
-                  className="live-dot h-1.5 w-1.5 rounded-full"
-                  style={{ background: "var(--brand)" }}
-                />
-                <span className="font-mono text-[0.6rem] tracking-[0.2em] text-faint uppercase">
-                  Currently
-                </span>
-              </li>
-
               {currentRoles.map((role) => (
                 <li key={role.id}>
                   <a
