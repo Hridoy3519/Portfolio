@@ -26,7 +26,7 @@ export const profile = {
    * would waste their time and mine. Append the valid-until date when known.
    * The entry is omitted while this is empty.
    */
-  workAuthorisation: "Finnish residence permit (type A)",
+  workAuthorisation: "",
   /** Plain-text version of the headline, used for metadata and screen readers. */
   headline:
     "Software Engineer Intern at GE HealthCare and Computer Science Master's student at the University of Helsinki",
