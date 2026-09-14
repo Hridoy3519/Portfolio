@@ -98,12 +98,13 @@ export default function Overview() {
                       href={`#${stop.id}`}
                       className="grid grid-cols-[1fr_auto] items-start gap-x-4 gap-y-1 rounded-md px-1 py-3 transition-colors hover:bg-white/[0.04] md:grid-cols-[10rem_1fr_4rem_7rem] md:items-center md:gap-y-0 md:py-2.5"
                     >
-                      {/* Period drops to its own row on phones */}
-                      <span className="order-3 col-span-2 font-mono text-[0.7rem] text-white/40 md:order-1 md:col-span-1 md:text-xs">
+                      {/* On phones the name/role column spans both rows, so the
+                          period and status stack flush against the right edge. */}
+                      <span className="order-2 col-start-2 justify-self-end font-mono text-[0.7rem] text-white/40 md:order-1 md:col-start-auto md:justify-self-start md:text-xs">
                         {stop.period}
                       </span>
 
-                      <span className="order-1 flex min-w-0 items-start gap-2.5 md:order-2">
+                      <span className="order-1 row-span-2 flex min-w-0 items-start gap-2.5 md:order-2 md:row-span-1">
                         <span
                           className="mt-[0.4rem] h-2 w-2 shrink-0 rounded-full"
                           style={{ background: stop.color }}
@@ -113,7 +114,9 @@ export default function Overview() {
                           <span className="block truncate text-sm font-medium text-white/90">
                             {stop.name}
                           </span>
-                          <span className="mt-0.5 block truncate font-mono text-[0.68rem] text-white/40">
+                          {/* Wraps rather than truncates — a clipped degree
+                              title tells the reader nothing. */}
+                          <span className="mt-0.5 block font-mono text-[0.68rem] leading-snug text-white/40">
                             {stop.role}
                           </span>
                         </span>
@@ -123,7 +126,7 @@ export default function Overview() {
                         {stop.number}
                       </span>
 
-                      <span className="order-2 justify-self-end md:order-4 md:text-right">
+                      <span className="order-3 col-start-2 justify-self-end md:order-4 md:col-start-auto md:text-right">
                         <span
                           className="font-mono text-[0.68rem] tracking-wide uppercase"
                           style={{

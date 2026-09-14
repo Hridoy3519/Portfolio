@@ -302,16 +302,16 @@ export const stops: Stop[] = [
 ];
 
 /**
- * Order for the summary board: current roles first, most recent last.
+ * Order for the summary board: current roles first, past ones after.
  * Listed by id rather than sorted by date, so the emphasis is a deliberate
- * choice — the master's leads, since it's why I'm in Finland at all.
+ * choice — it matches the order of the caption under my name.
  * Any stop missing from this list still appears, at the end.
  * The timeline itself keeps `stops` order, reading forwards through the
  * transitions between roles.
  */
 const BOARD_ORDER = [
-  "university-of-helsinki",
   "ge-healthcare",
+  "university-of-helsinki",
   "intexresearch-lab",
   "inverse-ai",
   "leading-university",
