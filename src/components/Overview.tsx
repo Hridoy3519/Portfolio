@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { cities, currentRoles, profile, stats, stops } from "@/content/site";
+import { cities, currentRoles, profile, stats, stopsByRecency } from "@/content/site";
 import CountUp from "./CountUp";
 import Reveal from "./Reveal";
 import SplitFlap from "./SplitFlap";
@@ -92,7 +92,7 @@ export default function Overview() {
               </div>
 
               <ul>
-                {stops.map((stop) => (
+                {stopsByRecency.map((stop) => (
                   <li key={stop.id}>
                     <a
                       href={`#${stop.id}`}

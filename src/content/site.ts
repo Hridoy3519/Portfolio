@@ -301,6 +301,13 @@ export const stops: Stop[] = [
   },
 ];
 
+/**
+ * Newest first, for the summary board — a reader scanning it wants the
+ * current roles at the top. The timeline itself stays in `stops` order,
+ * since it reads forwards through the transitions between roles.
+ */
+export const stopsByRecency = [...stops].reverse();
+
 export const skills = [
   {
     group: "Languages",
