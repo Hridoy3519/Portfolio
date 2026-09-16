@@ -191,7 +191,8 @@ export type Stop = {
   kind: "Education" | "Experience";
   role: string;
   period: string;
-  place: string;
+  /** Omit to show no location on the card. */
+  place?: string;
   color: string;
   current?: boolean;
   /** Factual one-line summary of the role. */
@@ -303,7 +304,6 @@ export const stops: Stop[] = [
     kind: "Experience",
     role: "Lead — Innovation & Development Unit",
     period: "Nov 2025 – Present",
-    place: "Helsinki, Finland · Part-time",
     color: "#22d3ee",
     current: true,
     summary:
@@ -316,8 +316,8 @@ export const stops: Stop[] = [
     ],
     tech: ["Flutter", "React", "TypeScript", "Node.js", "REST APIs", "MongoDB", "AI/ML integrations"],
     facts: [
-      { label: "Scope", value: "Architecture & delivery" },
-      { label: "Status", value: "Current role" },
+      { label: "Scope", value: "Research & Development" },
+      { label: "Status", value: "Part-time" },
     ],
   },
   {

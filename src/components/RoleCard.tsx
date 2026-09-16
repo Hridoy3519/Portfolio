@@ -72,7 +72,7 @@ export default function RoleCard({ stop }: { stop: Stop }) {
             <span className="font-medium" style={{ color: stop.color }}>
               {stop.role}
             </span>
-            <span className="text-faint"> · {stop.place}</span>
+            {stop.place ? <span className="text-faint"> · {stop.place}</span> : null}
           </p>
 
           <p
