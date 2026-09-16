@@ -505,10 +505,11 @@ export const academicProjects: AcademicProject[] = [
     name: "RAG Sales Analytics",
     course: "Data Warehousing",
     summary:
-      "A retrieval-augmented generation system that answers analytical questions about retail sales — trends, seasonality, category and regional performance — in plain language.",
+      "A retrieval-augmented generation system that answers analytical questions about four years of retail sales — trends, seasonality, category and regional performance — in plain language.",
     detail:
-      "Transactions and aggregate summaries are turned into text, embedded into a vector database with metadata filtering, and handed to an open-source LLM as retrieved context for each question.",
-    tech: ["Python", "RAG", "Vector database", "Embeddings", "LLM"],
+      "Sales records and aggregate summaries are chunked, embedded with all-MiniLM-L6-v2 into ChromaDB, and passed to Llama 3.2 3B running locally through Ollama. A 30-question ground-truth benchmark measures retrieval and answer accuracy separately.",
+    tech: ["Python", "ChromaDB", "Ollama", "Llama 3.2", "RAG"],
+    team: "Team of 2",
   },
 ];
 
