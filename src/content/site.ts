@@ -92,7 +92,7 @@ export const highlights = [
   { label: "Apps used by", value: "10M+ people" },
   { label: "Revenue lift", value: "40%" },
   { label: "LeetCode", value: "Top 2.82%" },
-  { label: "IEEEXtreme 15.0", value: "Global rank 390" },
+  { label: "IEEEXtreme 14.0", value: "Global rank 390" },
   { label: "Published", value: "IEEE GCAT 2022" },
   { label: "Problems solved", value: "2000+" },
 ] as const;
@@ -575,7 +575,13 @@ export const competitive: {
   intro:
     "More than 2,000 problems solved across competitive programming judges, alongside national and international contest results.",
   achievements: [
-    { title: "IEEEXtreme 15.0", detail: "Country Rank 7 · Global Rank 390" },
+    {
+      // Team LUSmallCamp. The CV said 15.0, but these ranks are in the official
+      // 14.0 results and match no Leading University team in 15.0 or 16.0.
+      title: "IEEEXtreme 14.0",
+      detail: "Country Rank 7 · Global Rank 390",
+      href: "https://ieeextreme.org/ieeextreme-14-0-ranking/",
+    },
     { title: "ICPC Dhaka Regional 2021", detail: "Participant" },
     {
       title: "LeetCode",
