@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import Overview from "@/components/Overview";
 import Projects from "@/components/Projects";
+import Recommendations from "@/components/Recommendations";
 // import Roadmap from "@/components/Roadmap"; // hidden — see <main> below
 import RouteMap from "@/components/RouteMap";
 import Skills from "@/components/Skills";
@@ -51,6 +52,7 @@ export default function Home() {
         <Projects />
         <Skills />
         <Achievements />
+        <Recommendations />
         {/* Hidden for now. Components and content are intact — re-render these
             two and restore their entries in `route` to bring them back. */}
         {/* <Background /> */}

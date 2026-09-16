@@ -653,7 +653,56 @@ export const research: {
 ];
 
 /** Certificate links come from the CV (Resume_Hridoy, September 2026). */
-export const certifications: { title: string; detail: string; href?: string }[] = [
+export const recommendationsUrl =
+  "https://www.linkedin.com/in/hridoy3519/details/recommendations/";
+
+/**
+ * Excerpts from LinkedIn recommendations, in each author's own words and
+ * trimmed with an ellipsis rather than paraphrased. Ordered by how directly
+ * the author saw the work: manager, client, teammate, fellow student.
+ */
+export const recommendations: {
+  name: string;
+  title: string;
+  relationship: string;
+  date: string;
+  quote: string;
+}[] = [
+  {
+    name: "Nasif Imtiaj",
+    title: "Mobile Application Developer",
+    relationship: "Managed me directly at Inverse.AI",
+    date: "April 2025",
+    quote:
+      "When we were integrating our custom video player in iOS for our video editor KMM project for the first time, Hridoy took the initiative to debug and resolve issues, showing resilience and a problem-solving mindset.",
+  },
+  {
+    name: "Damjan Dabo",
+    title: "Founder, ReleaseRocket and Itemlist",
+    relationship: "Client — iOS app in SwiftUI",
+    date: "September 2025",
+    quote:
+      "He took the lead on most of the design work… He also integrated AI features using the GPT API, showcasing both technical skill and creativity. I strongly recommend him to anyone looking for a reliable and talented iOS developer.",
+  },
+  {
+    name: "Jabed Dhali",
+    title: "Software Engineer III, Inverse.AI",
+    relationship: "Teammate for 2.5 years at Inverse.AI",
+    date: "March 2025",
+    quote:
+      "He possesses exceptional problem-solving skills, even in challenging environments… Rather than focusing solely on his own growth, he actively fosters the analytical and professional development of his entire team.",
+  },
+  {
+    name: "Mazharul Islam",
+    title: "Independent Product Engineer",
+    relationship: "Studied together; Chair of IEEE Computer Society LU SB",
+    date: "October 2024",
+    quote:
+      "When I served as Chair of the IEEE Computer Society LU SB Chapter, Hridoy took on the role of Secretary… we achieved several key milestones, including organizing the first-ever elections in the university's history.",
+  },
+];
+
+export const certifications:{ title: string; detail: string; href?: string }[] = [
   {
     title: "DevOps with Docker (MOOC)",
     detail: "Containerization fundamentals and deployment workflows",
@@ -713,9 +762,10 @@ export const route = [
   { id: "projects", label: "Projects & research", short: "01" },
   { id: "skills", label: "Technical skills", short: "02" },
   { id: "achievements", label: "Achievements", short: "03" },
+  { id: "recommendations", label: "Recommendations", short: "04" },
   // Background and "What's next" are hidden — see the commented-out
   // components in app/page.tsx. Restore both together.
   // { id: "background", label: "Background", short: "04" },
   // { id: "roadmap", label: "What's next", short: "05" },
-  { id: "contact", label: "Contact", short: "04" },
+  { id: "contact", label: "Contact", short: "05" },
 ] as const;
