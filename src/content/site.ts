@@ -562,6 +562,8 @@ export const research = [
     title:
       "Automated IELTS Writing Evaluation and Handwriting Recognition Using CNN, RNN, and the GPT-3 API",
     venue: "Leading University, 2023",
+    href: "https://www.researchgate.net/publication/384820985",
+    linkLabel: "ResearchGate",
   },
 ] as const;
 
