@@ -81,6 +81,45 @@ const themeScript = `
 })();
 `;
 
+/**
+ * Some browser extensions stamp marker attributes onto every element they
+ * scan (Bitdefender's TrafficLight adds `bis_skin_checked`), after the server
+ * HTML arrives but before React hydrates — so React reports a mismatch on
+ * every div. This strips those specific markers as they are added.
+ *
+ * It only ever removes known extension markers, so genuine hydration bugs in
+ * our own markup still surface. The observer disconnects shortly after load:
+ * once React has hydrated the markers are harmless, and stopping bounds any
+ * back-and-forth with an extension that re-adds them.
+ */
+const extensionMarkerScript = `
+(function () {
+  var MARKER = /^(bis_skin_checked|bis_register|__processed_.+__)$/;
+  function strip(el) {
+    if (!el.attributes) return;
+    for (var i = el.attributes.length - 1; i >= 0; i--) {
+      var name = el.attributes[i].name;
+      if (MARKER.test(name)) el.removeAttribute(name);
+    }
+  }
+  try {
+    var observer = new MutationObserver(function (mutations) {
+      for (var i = 0; i < mutations.length; i++) {
+        var m = mutations[i];
+        if (m.type === 'attributes' && MARKER.test(m.attributeName)) {
+          m.target.removeAttribute(m.attributeName);
+        }
+      }
+    });
+    observer.observe(document.documentElement, { attributes: true, subtree: true });
+    window.addEventListener('load', function () {
+      document.querySelectorAll('*').forEach(strip);
+      setTimeout(function () { observer.disconnect(); }, 2000);
+    });
+  } catch (e) {}
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -88,6 +127,7 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: extensionMarkerScript }} />
       </head>
       {/*
         suppressHydrationWarning is needed on <body> as well as <html>: it only
