@@ -74,6 +74,16 @@ export default function Achievements() {
                 <div className="border-l-2 pl-4" style={{ borderColor: "var(--line-strong)" }}>
                   <h4 className="text-sm font-medium">{cert.title}</h4>
                   <p className="mt-1 text-xs leading-relaxed text-faint">{cert.detail}</p>
+                  {cert.href ? (
+                    <a
+                      href={cert.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="link-underline mt-1.5 inline-block font-mono text-xs text-muted hover:text-brand"
+                    >
+                      Certificate ↗
+                    </a>
+                  ) : null}
                 </div>
               </Reveal>
             ))}

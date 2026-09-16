@@ -239,6 +239,14 @@ export const stops: Stop[] = [
         label: "Transcript",
         href: "https://drive.google.com/file/d/1JTczUEOMtIWvvRpfJSL53EfALXuAViZT/view?usp=sharing",
       },
+      {
+        label: "IEEE Best Volunteer award",
+        href: "https://drive.google.com/file/d/169lE8ClkAK3maxkuvEZexv9kiYCvTaxP/view?usp=sharing",
+      },
+      {
+        label: "IEEE Secretary certificate",
+        href: "https://drive.google.com/file/d/1Tn8j8VEz1WzflGxWUckQSDY4tujT8hmR/view?usp=sharing",
+      },
     ],
   },
   {
@@ -581,8 +589,16 @@ export const competitive: {
       detail: "Peak rank Specialist · 1497",
       href: "https://codeforces.com/profile/LU_Hridoy",
     },
-    { title: "Bitfest Intra LU Contest 2022", detail: "Champion" },
-    { title: "LU Intra Individual Contest 2022", detail: "Champion" },
+    {
+      title: "Bitfest Intra LU Contest 2022",
+      detail: "Champion",
+      href: "https://toph.co/contests/training/kbqjgx4/standings",
+    },
+    {
+      title: "LU Intra Individual Contest 2022",
+      detail: "Champion",
+      href: "https://coderoj.com/c/lu-intra-2022/standings",
+    },
   ],
   profiles: [
     { label: "Codeforces", href: "https://codeforces.com/profile/LU_Hridoy" },
@@ -626,14 +642,24 @@ export const research: {
   },
 ];
 
-export const certifications = [
+/** Certificate links come from the CV (Resume_Hridoy, September 2026). */
+export const certifications: { title: string; detail: string; href?: string }[] = [
   {
     title: "DevOps with Docker (MOOC)",
     detail: "Containerization fundamentals and deployment workflows",
+    href: "https://drive.google.com/file/d/1G04QgbPD2qj-EYL_JKe0IfS4hDmNL-dI/view?usp=sharing",
   },
-  { title: "Entrepreneurship Program", detail: "Helsinki Pre-Incubators · Builders Track" },
-  { title: "Complete Web Development", detail: "Programming Hero" },
-] as const;
+  {
+    title: "Entrepreneurship Program",
+    detail: "Helsinki Pre-Incubators · Builders Track",
+    href: "https://drive.google.com/file/d/1rulfDCnFEJDWdmmVjcT2yb9UzJLS52Gl/view?usp=sharing",
+  },
+  {
+    title: "Complete Web Development",
+    detail: "Programming Hero",
+    href: "https://drive.google.com/file/d/1CVcfSsb2-IKea2wNqCpQQcuAd2S67Yq7/view",
+  },
+];
 
 export const languages = [
   { name: "English", level: "Proficient — IELTS 8.0 / 9.0 (CEFR C1)" },
