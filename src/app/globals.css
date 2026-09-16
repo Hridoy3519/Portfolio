@@ -175,6 +175,16 @@ body::after {
     border-color: var(--line-strong);
   }
 
+  /* Skill icons sit in the chip's text colour and take the brand colour on
+     hover — calm at rest, a small reveal on interaction. */
+  .skill-chip svg {
+    transition: color 180ms ease;
+  }
+
+  .skill-chip:hover svg {
+    color: var(--skill-hover, currentColor);
+  }
+
   .link-underline {
     background-image: linear-gradient(currentColor, currentColor);
     background-size: 0% 1px;
