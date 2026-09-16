@@ -12,8 +12,8 @@ export const profile = {
   location: "Helsinki, Finland",
   email: "hridoy3519@gmail.com",
   phone: "+358 41 326 6280",
-  // Replace with your deployed domain once live — used for SEO + OG tags.
-  siteUrl: "https://hridoychowdhury.com",
+  // Production address on Vercel — used for SEO, Open Graph and structured data.
+  siteUrl: "https://hridoy-chowdhury.vercel.app",
   availability: "Open to software engineering roles",
   /**
    * Served from public/cv.pdf. Leave empty and the board omits the entry —
