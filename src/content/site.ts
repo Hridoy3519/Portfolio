@@ -667,11 +667,23 @@ export const certifications: { title: string; detail: string; href?: string }[] 
   },
 ];
 
-export const languages = [
-  { name: "English", level: "Proficient — IELTS 8.0 / 9.0 (CEFR C1)" },
+export const languages: {
+  name: string;
+  level: string;
+  href?: string;
+  linkLabel?: string;
+}[] = [
+  {
+    name: "English",
+    level: "Proficient — IELTS 8.0 / 9.0 (CEFR C1)",
+    // The Test Report Form shows date of birth, nationality and candidate
+    // number. Linked at the owner's request; the same file is linked in the CV.
+    href: "https://drive.google.com/file/d/1VjvkE41k5YgqaSckGsCXt5IDPv6ST0t5/view",
+    linkLabel: "IELTS Test Report Form",
+  },
   { name: "Finnish", level: "Finnish 1A, basic proficiency (4.0 / 5.0)" },
   { name: "Bangla", level: "Native" },
-] as const;
+];
 
 /** Current and longer-term goals. */
 export const roadmap = [

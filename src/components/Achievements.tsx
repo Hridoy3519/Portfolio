@@ -102,6 +102,16 @@ export default function Achievements() {
                 <div className="border-l-2 pl-4" style={{ borderColor: "var(--line-strong)" }}>
                   <h4 className="text-sm font-medium">{lang.name}</h4>
                   <p className="mt-1 text-xs leading-relaxed text-faint">{lang.level}</p>
+                  {lang.href ? (
+                    <a
+                      href={lang.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="link-underline mt-1.5 inline-block font-mono text-xs text-muted hover:text-brand"
+                    >
+                      {lang.linkLabel} ↗
+                    </a>
+                  ) : null}
                 </div>
               </Reveal>
             ))}
