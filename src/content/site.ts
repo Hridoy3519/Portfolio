@@ -203,7 +203,8 @@ export type Stop = {
   summary: string;
   highlights: string[];
   tech: string[];
-  facts?: { label: string; value: string }[];
+  /** `progress` (0–1) draws a bar under the value, e.g. credits completed. */
+  facts?: { label: string; value: string; progress?: number }[];
   links?: { label: string; href: string }[];
 };
 
@@ -308,6 +309,8 @@ export const stops: Stop[] = [
     tech: ["Scalable Systems", "Full-stack", "MLOps", "Docker", "CI/CD"],
     facts: [
       { label: "Average grade", value: "4.83 / 5.00" },
+      // Update both numbers as credits come in; the bar is derived from them.
+      { label: "Credits completed", value: "78 / 120 ECTS", progress: 78 / 120 },
       { label: "Scholarship", value: "100%, merit-based" },
     ],
     links: [

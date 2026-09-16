@@ -115,8 +115,12 @@ export default function RoleCard({ stop }: { stop: Stop }) {
 
           {stop.facts?.length ? (
             <dl
-              className={`mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line ${
-                stop.facts.length >= 4 ? "md:grid-cols-4" : ""
+              className={`mt-7 grid gap-px overflow-hidden rounded-lg border border-line ${
+                stop.facts.length >= 4
+                  ? "grid-cols-2 md:grid-cols-4"
+                  : stop.facts.length === 3
+                    ? "grid-cols-1 sm:grid-cols-3" // avoids a lone tile on a 2-column row
+                    : "grid-cols-2"
               }`}
               style={{ background: "var(--line)" }}
             >
@@ -126,6 +130,25 @@ export default function RoleCard({ stop }: { stop: Stop }) {
                   <dd className="mt-1 font-mono text-sm font-medium" style={{ color: stop.color }}>
                     {fact.value}
                   </dd>
+                  {fact.progress !== undefined ? (
+                    <div
+                      className="mt-2 h-1 overflow-hidden rounded-full"
+                      style={{ background: "var(--line)" }}
+                      role="progressbar"
+                      aria-label={fact.label}
+                      aria-valuenow={Math.round(fact.progress * 100)}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                    >
+                      <div
+                        className="h-full rounded-full"
+                        style={{
+                          width: `${Math.min(Math.max(fact.progress, 0), 1) * 100}%`,
+                          background: stop.color,
+                        }}
+                      />
+                    </div>
+                  ) : null}
                 </div>
               ))}
             </dl>
