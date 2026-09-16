@@ -1,7 +1,10 @@
 import Image from "next/image";
-import { projects, research } from "@/content/site";
+import { academicProjects, projects, research } from "@/content/site";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
+
+/** University of Helsinki's accent, so coursework ties back to that card. */
+const UNIVERSITY = "#a78bfa";
 
 export default function Projects() {
   return (
@@ -9,7 +12,7 @@ export default function Projects() {
       id="projects"
       eyebrow="Selected work"
       title="Projects & research"
-      lead="Products I've shipped or am building — one of my own, three from Inverse.AI — and the research behind them."
+      lead="Products I've shipped or am building, the machine learning and data work from my master's, and published research."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {projects.map((project, i) => (
@@ -78,17 +81,77 @@ export default function Projects() {
         ))}
       </div>
 
+      <GroupDivider label="University projects" />
+
+      <div className="grid gap-4 lg:grid-cols-3">
+        {academicProjects.map((item, i) => (
+          <Reveal key={item.name} delay={i * 70}>
+            <article
+              className="card card-hover relative flex h-full flex-col overflow-hidden p-6"
+              style={{ borderTop: `3px solid ${UNIVERSITY}` }}
+            >
+              <span
+                className="pointer-events-none absolute -top-16 -right-16 h-52 w-52 rounded-full opacity-[0.1] blur-3xl"
+                style={{ background: UNIVERSITY }}
+                aria-hidden="true"
+              />
+
+              <div className="relative flex items-baseline justify-between gap-3">
+                <span
+                  className="font-mono text-[0.58rem] tracking-[0.16em] uppercase"
+                  style={{ color: UNIVERSITY }}
+                >
+                  {item.course}
+                </span>
+                {item.team ? (
+                  <span className="shrink-0 font-mono text-[0.58rem] text-faint">{item.team}</span>
+                ) : null}
+              </div>
+              <h3 className="relative mt-1.5 text-[0.98rem] leading-snug font-semibold tracking-tight">
+                {item.name}
+              </h3>
+
+              <p className="relative mt-3 text-sm leading-relaxed text-muted">{item.summary}</p>
+              <p className="relative mt-3 flex-1 text-[0.8rem] leading-relaxed text-faint">
+                {item.detail}
+              </p>
+
+              {item.result ? (
+                <p
+                  className="relative mt-5 rounded-md border px-3 py-2 font-mono text-[0.7rem]"
+                  style={{ borderColor: "var(--line)", color: UNIVERSITY }}
+                >
+                  {item.result}
+                </p>
+              ) : null}
+
+              <div className="relative mt-4 flex flex-wrap gap-1.5">
+                {item.tech.map((tech) => (
+                  <span key={tech} className="chip font-mono">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {item.href ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="link-underline relative mt-5 self-start font-mono text-xs"
+                  style={{ color: UNIVERSITY }}
+                >
+                  {item.linkLabel} ↗
+                </a>
+              ) : null}
+            </article>
+          </Reveal>
+        ))}
+      </div>
+
       {/* Research sits in the same section as the work it relates to, but
           visible rather than behind a tab — a paper only counts if it's read. */}
-      <Reveal>
-        <div className="mt-14 mb-7 flex items-center gap-4">
-          <span className="h-px flex-1" style={{ background: "var(--line)" }} aria-hidden="true" />
-          <h3 className="font-mono text-[0.62rem] tracking-[0.2em] text-faint uppercase">
-            Research
-          </h3>
-          <span className="h-px flex-1" style={{ background: "var(--line)" }} aria-hidden="true" />
-        </div>
-      </Reveal>
+      <GroupDivider label="Research" />
 
       <div className="grid gap-4 md:grid-cols-2">
         {research.map((item, i) => (
@@ -112,5 +175,17 @@ export default function Projects() {
         ))}
       </div>
     </SectionHeader>
+  );
+}
+
+function GroupDivider({ label }: { label: string }) {
+  return (
+    <Reveal>
+      <div className="mt-14 mb-7 flex items-center gap-4">
+        <span className="h-px flex-1" style={{ background: "var(--line)" }} aria-hidden="true" />
+        <h3 className="font-mono text-[0.62rem] tracking-[0.2em] text-faint uppercase">{label}</h3>
+        <span className="h-px flex-1" style={{ background: "var(--line)" }} aria-hidden="true" />
+      </div>
+    </Reveal>
   );
 }

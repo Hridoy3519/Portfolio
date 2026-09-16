@@ -461,6 +461,57 @@ export const projects: Project[] = [
   },
 ];
 
+export type AcademicProject = {
+  name: string;
+  course: string;
+  summary: string;
+  detail: string;
+  /** Headline result. Omit rather than guess. */
+  result?: string;
+  tech: string[];
+  /** Group projects say so — the credit is shared. */
+  team?: string;
+  href?: string;
+  linkLabel?: string;
+};
+
+/** Coursework at the University of Helsinki, most substantial first. */
+export const academicProjects: AcademicProject[] = [
+  {
+    name: "Skill Gap Analyser",
+    course: "Introduction to Data Science",
+    summary:
+      "Pulls the technical skills out of a job description automatically, and finds open roles that match the skills a candidate already has.",
+    detail:
+      "A custom BiLSTM-CRF named-entity recognition model, built from scratch in PyTorch and trained on 1,018 hand-annotated job postings. It runs on a serverless GPU with sub-200 ms inference, behind a Django API and a Next.js front end.",
+    result: "F1 0.963 · precision 0.976 · recall 0.950",
+    tech: ["PyTorch", "BiLSTM-CRF", "NLP", "Django", "Next.js"],
+    team: "Team of 3",
+    href: "https://skill-recognition.vercel.app/",
+    linkLabel: "Live demo",
+  },
+  {
+    name: "New Particle Formation Classifier",
+    course: "Introduction to Machine Learning",
+    summary:
+      "Predicts atmospheric new-particle-formation events from a day of sensor readings at the SMEAR II research station in Hyytiälä, Finland.",
+    detail:
+      "Benchmarked six model families under 5-fold cross-validation. A calibrated logistic regression beat the tree ensembles: the scoring metric rewarded well-calibrated probabilities, and the event boundary proved close to linear.",
+    result: "Kaggle score 0.747 · best of six model families",
+    tech: ["Python", "scikit-learn", "Probability calibration", "PCA"],
+    team: "Team of 2",
+  },
+  {
+    name: "RAG Sales Analytics",
+    course: "Data Warehousing",
+    summary:
+      "A retrieval-augmented generation system that answers analytical questions about retail sales — trends, seasonality, category and regional performance — in plain language.",
+    detail:
+      "Transactions and aggregate summaries are turned into text, embedded into a vector database with metadata filtering, and handed to an open-source LLM as retrieved context for each question.",
+    tech: ["Python", "RAG", "Vector database", "Embeddings", "LLM"],
+  },
+];
+
 export const skills = [
   {
     group: "Languages",
