@@ -548,7 +548,14 @@ export const competitive = {
   ],
 } as const;
 
-export const research = [
+export const research: {
+  type: string;
+  title: string;
+  /** Omit rather than guess. */
+  venue?: string;
+  href?: string;
+  linkLabel?: string;
+}[] = [
   {
     type: "Publication",
     title:
@@ -558,6 +565,14 @@ export const research = [
     linkLabel: "DOI: 10.1109/GCAT55367.2022.9971827",
   },
   {
+    type: "Literature review",
+    // Title taken from the ResearchGate URL; punctuation is inferred.
+    title:
+      "A Systematic Literature Review of AI Applications in Software Development: Implementation, Testing, and Code Review",
+    href: "https://www.researchgate.net/publication/414384977",
+    linkLabel: "ResearchGate",
+  },
+  {
     type: "Academic writing",
     title:
       "Automated IELTS Writing Evaluation and Handwriting Recognition Using CNN, RNN, and the GPT-3 API",
@@ -565,7 +580,7 @@ export const research = [
     href: "https://www.researchgate.net/publication/384820985",
     linkLabel: "ResearchGate",
   },
-] as const;
+];
 
 export const certifications = [
   {

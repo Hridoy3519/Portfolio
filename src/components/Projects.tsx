@@ -153,14 +153,14 @@ export default function Projects() {
           visible rather than behind a tab — a paper only counts if it's read. */}
       <GroupDivider label="Research" />
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {research.map((item, i) => (
           <Reveal key={item.title} delay={i * 70}>
             <article className="card card-hover h-full p-6">
               <span className="chip font-mono">{item.type}</span>
               <h4 className="mt-3.5 text-sm leading-relaxed font-medium">{item.title}</h4>
-              <p className="mt-2 text-xs text-faint">{item.venue}</p>
-              {"href" in item && item.href ? (
+              {item.venue ? <p className="mt-2 text-xs text-faint">{item.venue}</p> : null}
+              {item.href ? (
                 <a
                   href={item.href}
                   target="_blank"
