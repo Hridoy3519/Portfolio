@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Stop } from "@/content/site";
 import Reveal from "./Reveal";
 
@@ -30,12 +31,29 @@ export default function RoleCard({ stop }: { stop: Stop }) {
           style={{ background: "color-mix(in srgb, var(--bg-subtle) 72%, transparent)" }}
         >
           <div className="flex min-w-0 items-center gap-4">
-            <span
-              className="grid h-11 w-11 shrink-0 place-items-center rounded-lg font-mono text-sm font-semibold transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-6"
-              style={{ background: stop.color, color: "#0a0b0f" }}
-            >
-              {stop.code}
-            </span>
+            {stop.logo ? (
+              // Logos sit on white so each keeps its own brand colours in both
+              // themes; the ring carries the stop's accent colour.
+              <span
+                className="relative grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-xl bg-white transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-6"
+                style={{ boxShadow: `0 0 0 2px ${stop.color}` }}
+              >
+                <Image
+                  src={stop.logo}
+                  alt={`${stop.name} logo`}
+                  width={48}
+                  height={48}
+                  className={stop.logoFill ? "h-full w-full object-cover" : "h-9 w-9 object-contain"}
+                />
+              </span>
+            ) : (
+              <span
+                className="grid h-11 w-11 shrink-0 place-items-center rounded-lg font-mono text-sm font-semibold transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-6"
+                style={{ background: stop.color, color: "#0a0b0f" }}
+              >
+                {stop.code}
+              </span>
+            )}
             <div className="min-w-0">
               <p className="font-mono text-[0.62rem] tracking-[0.18em] text-faint uppercase">
                 {stop.number} · {stop.kind}

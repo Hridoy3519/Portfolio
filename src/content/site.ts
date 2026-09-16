@@ -188,6 +188,10 @@ export type Stop = {
   number: string;
   /** The organisation — this is the card's headline. */
   name: string;
+  /** Official logo in public/orgs, taken from the organisation's own site. */
+  logo?: string;
+  /** Logo already fills a coloured square, so it shouldn't sit on a white tile. */
+  logoFill?: boolean;
   kind: "Education" | "Experience";
   role: string;
   period: string;
@@ -209,6 +213,7 @@ export const stops: Stop[] = [
     code: "SYL",
     number: "01",
     name: "Leading University",
+    logo: "/orgs/leading-university.png",
     kind: "Education",
     role: "B.Sc. in Computer Science & Engineering",
     period: "Jan 2019 – Dec 2022",
@@ -241,6 +246,7 @@ export const stops: Stop[] = [
     code: "DAC",
     number: "02",
     name: "Inverse.AI",
+    logo: "/orgs/inverse-ai.png",
     kind: "Experience",
     role: "Software Engineer",
     period: "Nov 2022 – May 2025",
@@ -269,6 +275,7 @@ export const stops: Stop[] = [
     code: "HEL",
     number: "03",
     name: "University of Helsinki",
+    logo: "/orgs/university-of-helsinki.png",
     kind: "Education",
     role: "M.Sc. in Computer Science",
     period: "Aug 2025 – July 2027",
@@ -301,6 +308,8 @@ export const stops: Stop[] = [
     code: "IRL",
     number: "04",
     name: "IntexResearch Lab",
+    logo: "/orgs/intexresearch-lab.png",
+    logoFill: true,
     kind: "Experience",
     role: "Lead — Innovation & Development Unit",
     period: "Nov 2025 – Present",
@@ -325,6 +334,7 @@ export const stops: Stop[] = [
     code: "GEH",
     number: "05",
     name: "GE HealthCare",
+    logo: "/orgs/ge-healthcare.png",
     kind: "Experience",
     role: "Software Engineer Intern",
     period: "Summer 2026 – Present",

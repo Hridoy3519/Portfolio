@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
   boardStops,
@@ -109,11 +110,23 @@ export default function Overview() {
                       </span>
 
                       <span className="order-1 row-span-2 flex min-w-0 items-start gap-2.5 md:order-2 md:row-span-1">
-                        <span
-                          className="mt-[0.4rem] h-2 w-2 shrink-0 rounded-full"
-                          style={{ background: stop.color }}
-                          aria-hidden="true"
-                        />
+                        {stop.logo ? (
+                          <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center overflow-hidden rounded-md bg-white">
+                            <Image
+                              src={stop.logo}
+                              alt=""
+                              width={28}
+                              height={28}
+                              className={stop.logoFill ? "h-full w-full object-cover" : "h-5 w-5 object-contain"}
+                            />
+                          </span>
+                        ) : (
+                          <span
+                            className="mt-[0.4rem] h-2 w-2 shrink-0 rounded-full"
+                            style={{ background: stop.color }}
+                            aria-hidden="true"
+                          />
+                        )}
                         <span className="min-w-0">
                           <span className="block truncate text-sm font-medium text-white/90">
                             {stop.name}
