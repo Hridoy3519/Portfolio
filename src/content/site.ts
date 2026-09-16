@@ -233,7 +233,8 @@ export const stops: Stop[] = [
     tech: ["C++", "Algorithms", "Data Structures", "OOP"],
     facts: [
       { label: "CGPA", value: "3.74 / 4.00" },
-      { label: "Role", value: "Teaching Assistant" },
+      // Labelled by the work, not "Role": I was a student here who also TA'd.
+      { label: "Teaching assistant", value: "Data Structures & Algorithms" },
     ],
     links: [
       {
