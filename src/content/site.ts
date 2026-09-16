@@ -269,6 +269,12 @@ export const stops: Stop[] = [
       { label: "Noise Reducer", value: "10M+ users" },
       { label: "Video Editor · Android", value: "100k+ users" },
     ],
+    links: [
+      {
+        label: "Certificate of Appreciation",
+        href: "https://drive.google.com/file/d/1O5dB3i-4K82AeG76viZj_6nfOk_SG5_V/view?usp=sharing",
+      },
+    ],
   },
   {
     id: "university-of-helsinki",
@@ -552,18 +558,39 @@ export const skills = [
   },
 ] as const;
 
-export const competitive = {
+export const competitive: {
+  intro: string;
+  achievements: { title: string; detail: string; href?: string }[];
+  /** Judge profiles, linked from the CV. */
+  profiles: { label: string; href: string }[];
+} = {
   intro:
     "More than 2,000 problems solved across competitive programming judges, alongside national and international contest results.",
   achievements: [
     { title: "IEEEXtreme 15.0", detail: "Country Rank 7 · Global Rank 390" },
     { title: "ICPC Dhaka Regional 2021", detail: "Participant" },
-    { title: "LeetCode", detail: "Top 2.82% globally" },
-    { title: "Codeforces", detail: "Specialist" },
+    {
+      title: "LeetCode",
+      detail: "Top 2.82% globally",
+      href: "https://leetcode.com/Hridoy3519/",
+    },
+    {
+      // Codeforces shows the current rank first, which has dropped to Pupil;
+      // stating the peak keeps the claim true to what a visitor will find.
+      title: "Codeforces",
+      detail: "Peak rank Specialist · 1497",
+      href: "https://codeforces.com/profile/LU_Hridoy",
+    },
     { title: "Bitfest Intra LU Contest 2022", detail: "Champion" },
     { title: "LU Intra Individual Contest 2022", detail: "Champion" },
   ],
-} as const;
+  profiles: [
+    { label: "Codeforces", href: "https://codeforces.com/profile/LU_Hridoy" },
+    { label: "LeetCode", href: "https://leetcode.com/Hridoy3519/" },
+    { label: "CodeChef", href: "https://www.codechef.com/users/hridoy_3519" },
+    { label: "LightOJ", href: "https://lightoj.com/user/hridoy3519" },
+  ],
+};
 
 export const research: {
   type: string;

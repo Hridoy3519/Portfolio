@@ -11,15 +11,55 @@ export default function Achievements() {
       lead={competitive.intro}
     >
       <div className="grid gap-4 md:grid-cols-3">
-        {competitive.achievements.map((item, i) => (
-          <Reveal key={item.title} delay={i * 45}>
-            <div className="card card-hover h-full p-5">
-              <h3 className="text-sm leading-snug font-medium">{item.title}</h3>
+        {competitive.achievements.map((item, i) => {
+          const body = (
+            <>
+              <h3 className="flex items-baseline justify-between gap-3 text-sm leading-snug font-medium">
+                {item.title}
+                {item.href ? (
+                  <span className="font-mono text-xs text-faint transition-colors group-hover:text-brand">
+                    ↗
+                  </span>
+                ) : null}
+              </h3>
               <p className="mt-1.5 font-mono text-xs text-brand">{item.detail}</p>
-            </div>
-          </Reveal>
-        ))}
+            </>
+          );
+          return (
+            <Reveal key={item.title} delay={i * 45}>
+              {item.href ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="card card-hover group block h-full p-5"
+                >
+                  {body}
+                </a>
+              ) : (
+                <div className="card card-hover h-full p-5">{body}</div>
+              )}
+            </Reveal>
+          );
+        })}
       </div>
+
+      <Reveal>
+        <p className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-faint">
+          <span className="tracking-[0.18em] uppercase">Profiles</span>
+          {competitive.profiles.map((profile) => (
+            <a
+              key={profile.label}
+              href={profile.href}
+              target="_blank"
+              rel="noreferrer"
+              className="link-underline text-muted hover:text-brand"
+            >
+              {profile.label} ↗
+            </a>
+          ))}
+        </p>
+      </Reveal>
 
       <div className="mt-14 grid gap-10 md:grid-cols-2 md:gap-14">
         <div>
