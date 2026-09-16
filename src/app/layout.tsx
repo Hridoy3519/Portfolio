@@ -120,15 +120,21 @@ const extensionMarkerScript = `
 })();
 `;
 
+/**
+ * Both boot scripts, as one tag at the very start of <body> rather than in
+ * <head>. Extensions inject their own <script> tags into <head> before React
+ * hydrates, at a position that depends on timing; a script of ours in <head>
+ * ends up compared against the extension's and reported as a mismatch.
+ * Nothing lands at the start of <body>, and a script there still runs before
+ * any content is parsed, so the theme is applied without a flash.
+ */
+const bootScript = themeScript + extensionMarkerScript;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <script dangerouslySetInnerHTML={{ __html: extensionMarkerScript }} />
-      </head>
       {/*
         suppressHydrationWarning is needed on <body> as well as <html>: it only
         applies one level deep, and extensions (password managers, grammar
@@ -138,6 +144,7 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrains.variable} font-sans`}
         suppressHydrationWarning
       >
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         {children}
       </body>
     </html>
