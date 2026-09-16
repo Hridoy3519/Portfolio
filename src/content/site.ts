@@ -63,7 +63,7 @@ export const serviceInfo: {
     label: "Languages",
     value: "English (Fluent) · Finnish (Basic) · Bangla (Native)",
   },
-  { label: "Focus", value: "Full-stack · Systems · Mobile" },
+  { label: "Focus", value: "Full-stack · Systems · Mobile · AI Engineering" },
   // Appears only once profile.cvUrl is set, so no broken link can ship.
   ...(profile.cvUrl
     ? [
@@ -525,6 +525,12 @@ export const skills = [
   {
     group: "Backend & Data",
     items: ["Node.js", "Express.js", "REST APIs", "MongoDB", "MySQL", "Firebase"],
+  },
+  {
+    // Each item is backed by a project on the page: the Skill Gap Analyser,
+    // the NPF classifier, the RAG system and the IELTS evaluation paper.
+    group: "AI & Machine Learning",
+    items: ["PyTorch", "scikit-learn", "LLMs & RAG", "Vector databases", "NLP", "Model evaluation"],
   },
   {
     group: "Engineering",
