@@ -32,7 +32,7 @@ export const profile = {
     "Software Engineer Intern at GE HealthCare and Computer Science Master's student at the University of Helsinki",
   /** Short summary under the name — who I am right now, in my own voice. */
   tagline:
-    "Second year of my Master's, currently interning at GE HealthCare. I enjoy working on products people actually use, and being part of the team that builds them. Longer term, my ambition is to start something of my own.",
+    "I'm a second-year Master's student at the University of Helsinki, currently interning at GE HealthCare. I aspire to become a senior software engineer and a product person. Alongside my studies, I'm building a few personal projects and leading the R&D team at IntexResearch Lab. I'm open to software engineering opportunities.",
 } as const;
 
 export const socials = [
