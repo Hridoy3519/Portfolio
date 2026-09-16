@@ -123,7 +123,8 @@ export const currentRoles = [
 export const journey = {
   from: { code: "SYL", label: "Sylhet · 2019" },
   to: { code: "HEL", label: "Helsinki · now" },
-  span: "7 YRS",
+  // Distance rather than duration: the great-circle figure from the milepost.
+  span: "6,358 KM",
   years: "2019 — PRESENT",
 } as const;
 

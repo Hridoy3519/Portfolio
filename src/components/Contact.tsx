@@ -15,7 +15,7 @@ export default function Contact() {
           </span>
           <h2 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">Get in touch</h2>
           <p className="mt-3 max-w-2xl text-[0.95rem] leading-relaxed text-muted">
-            I&apos;m open to graduate software engineering roles and to collaborating on
+            I&apos;m open to software engineering roles and to collaborating on
             interesting problems. Email is the fastest way to reach me.
           </p>
         </div>
@@ -126,7 +126,7 @@ export default function Contact() {
               aria-hidden="true"
             />
             <span className="stamp absolute top-5 right-5" aria-hidden="true">
-              Available 2027
+              Available
             </span>
 
             <div className="flex h-full flex-col justify-between gap-6 px-6 py-8 md:px-7">
