@@ -91,7 +91,7 @@ export const highlights = [
   { label: "Interning at", value: "GE HealthCare" },
   { label: "Master's in", value: "Computer Science" },
   { label: "Scholarship", value: "100% merit-based" },
-  { label: "Average grade", value: "4.83 / 5.00" },
+  { label: "Average grade", value: "4.92 / 5.00" },
   { label: "Apps used by", value: "10M+ people" },
   { label: "Revenue lift", value: "40%" },
   { label: "LeetCode", value: "Top 2.82%" },
@@ -308,12 +308,12 @@ export const stops: Stop[] = [
       "Awarded a 100% scholarship on academic merit.",
       "Study track: Software Engineering — scalable systems, full-stack development, MLOps.",
       "Master's thesis interest: applying AI/ML across the stages of the software development lifecycle.",
-      "Currently holding an average grade of 4.83 / 5.00.",
+      "Currently holding an average grade of 4.92 / 5.00.",
       "Joined the Helsinki Pre-Incubators Builders Track shortly after arriving, to develop my own product ideas.",
     ],
     tech: ["Scalable Systems", "Full-stack", "MLOps", "Docker", "CI/CD"],
     facts: [
-      { label: "Average grade", value: "4.83 / 5.00" },
+      { label: "Average grade", value: "4.92 / 5.00" },
       // Update both numbers as credits come in; the bar is derived from them.
       { label: "Credits completed", value: "78 / 120 ECTS", progress: 78 / 120 },
       { label: "Scholarship", value: "100%, merit-based" },
