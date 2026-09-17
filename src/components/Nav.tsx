@@ -100,14 +100,15 @@ export default function Nav() {
             </a>
 
             {/* Current stop, like the next-station display inside a carriage */}
-            <div
-              className="nav-stop hidden min-w-0 items-center gap-2.5 rounded-full py-1.5 pr-3.5 pl-2.5 sm:flex"
-              aria-live="polite"
-            >
+            <div className="nav-stop hidden min-w-0 items-center gap-2.5 rounded-full py-1.5 pr-3.5 pl-2.5 sm:flex">
               <span className="live-dot h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "var(--brand)" }} />
-              <span key={current.id} className="nav-stop-text flex min-w-0 items-baseline gap-2">
-                <span className="font-mono text-[0.65rem] tracking-wider text-faint">{current.short}</span>
-                <span className="truncate text-[0.8rem] font-medium">{current.label}</span>
+              {/* Only the stop announces. The percentage below changes on nearly
+                  every scroll frame, so it stays outside the live region. */}
+              <span className="flex min-w-0" aria-live="polite">
+                <span key={current.id} className="nav-stop-text flex min-w-0 items-baseline gap-2">
+                  <span className="font-mono text-[0.65rem] tracking-wider text-faint">{current.short}</span>
+                  <span className="truncate text-[0.8rem] font-medium">{current.label}</span>
+                </span>
               </span>
               <span className="font-mono text-[0.65rem] text-faint tabular-nums">
                 {Math.round(progress * 100)}%
