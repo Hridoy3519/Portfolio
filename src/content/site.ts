@@ -32,7 +32,7 @@ export const profile = {
     "Software Engineer Intern at GE HealthCare and Computer Science Master's student at the University of Helsinki",
   /** Short summary under the name — who I am right now, in my own voice. */
   tagline:
-    "I'm a second-year Master's student at the University of Helsinki, currently interning at GE HealthCare. I aspire to become a senior software engineer and a product person. Alongside my studies, I'm building a few personal projects and leading the R&D team at IntexResearch Lab. I'm open to software engineering opportunities.",
+    "I'm a second-year Master's student at the University of Helsinki, currently interning at GE HealthCare. I aspire to become a senior software engineer and a product person. Alongside my studies, I'm building a few personal projects and leading the R&D team at IntexResearch Lab — I enjoy the startup community and building products from the ground up. I'm open to software engineering opportunities.",
 } as const;
 
 export const socials = [
@@ -364,11 +364,11 @@ export const stops: Stop[] = [
       "Patient Care Solutions — backend and frontend software for patient monitoring devices, built to medical-industry quality standards.",
     highlights: [
       "Developing backend and frontend software for patient monitors using C++, Python and web technologies.",
-      "Delivering software that meets medical-industry quality and reliability requirements.",
+      "Working within a native AI-driven development lifecycle (AIDLC) — building agent skills and integrating MCP servers and tools into everyday engineering work.",
       "Owning implementation, code reviews, testing and documentation within a multidisciplinary global Agile team.",
       "Learning first-hand how healthcare software is built and validated inside a large organisation.",
     ],
-    tech: ["C++", "Python", "Web Technologies", "Git", "Linux", "Agile"],
+    tech: ["C++", "Python", "Web Technologies", "AI Agents", "MCP", "Git", "Linux", "Agile"],
     facts: [
       { label: "Domain", value: "Patient Monitoring" },
       { label: "Team", value: "Global, multidisciplinary" },
