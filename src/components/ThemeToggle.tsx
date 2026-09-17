@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(true);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setIsDark(document.documentElement.classList.contains("dark"));
-    setMounted(true);
   }, []);
 
   function toggle() {
@@ -27,10 +25,19 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      className="grid h-9 w-9 place-items-center rounded-lg border border-line bg-subtle text-muted transition hover:text-brand"
+      className="nav-btn relative h-9 w-9 overflow-hidden rounded-lg"
     >
-      {/* Render a stable icon until mounted to avoid a hydration mismatch */}
-      {!mounted || isDark ? <SunIcon /> : <MoonIcon />}
+      {/* Both icons ride a dial pivoting below the button; the .dark class
+          turns it, so one sets as the other rises. Driven by CSS rather than
+          state, it renders the same on the server and needs no mount guard. */}
+      <span className="toggle-dial absolute inset-0">
+        <span className="toggle-face absolute inset-0 grid place-items-center">
+          <SunIcon />
+        </span>
+        <span className="toggle-face toggle-face-back absolute inset-0 grid place-items-center">
+          <MoonIcon />
+        </span>
+      </span>
     </button>
   );
 }

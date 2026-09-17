@@ -15,6 +15,8 @@
   --bg-subtle: #eceef4;
   --board: #14161d;
   --board-ink: #f7c948;
+  /* "Current" status lamp — the board is dark in both themes, so one green serves both */
+  --board-live: #4ade80;
   --text: #0d0f14;
   --text-muted: #545a6b;
   --text-faint: #838a9c;
@@ -26,9 +28,6 @@
   --grain: 0.035;
   /* Hero sky — day in the light theme */
   --sky: linear-gradient(to bottom, #8fc9ec 0%, #c6e3f4 55%, transparent 92%);
-  --sky-body: #fcd34d;
-  --sky-glow: rgba(252, 211, 77, 0.45);
-  --sky-body-top: 11%;
   --sky-stars: 0;
   --shadow: 0 1px 2px rgba(13, 15, 20, 0.05), 0 10px 30px rgba(13, 15, 20, 0.07);
 }
@@ -50,9 +49,6 @@
   --grain: 0.055;
   /* Hero sky — night in the dark theme */
   --sky: linear-gradient(to bottom, #0a1028 0%, #131a33 55%, transparent 90%);
-  --sky-body: #e8ecf5;
-  --sky-glow: rgba(232, 236, 245, 0.18);
-  --sky-body-top: 12%;
   --sky-stars: 0.75;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 14px 44px rgba(0, 0, 0, 0.5);
 }
@@ -369,6 +365,216 @@ body::after {
   }
 }
 
+/* Sun and moon rise and set with the theme. Each body has an orbit layer
+   (sideways) and a lift layer (up/down); easing the two differently bends the
+   path into an arc. A transition takes its timing from the state it moves
+   into, so "up" states ease like a rise and "down" states like a set, and the
+   rising body waits a beat for the setting one to clear. */
+.sky-orbit,
+.sky-lift {
+  pointer-events: none;
+}
+
+.sky-disc {
+  transition: box-shadow 900ms ease;
+}
+
+.sky-sun {
+  background: #fcd34d;
+  box-shadow: 0 0 42px 12px rgba(252, 211, 77, 0.45);
+}
+
+.sky-moon {
+  background: #e8ecf5;
+  box-shadow: 0 0 42px 12px rgba(232, 236, 245, 0.18);
+}
+
+/* Rising: climbs steeply off the horizon, then levels out */
+.sky-orbit-sun,
+.dark .sky-orbit-moon {
+  transform: translateX(0);
+  transition: transform 1300ms cubic-bezier(0.5, 0, 0.6, 1) 350ms;
+}
+
+.sky-orbit-sun > .sky-lift,
+.dark .sky-orbit-moon > .sky-lift {
+  transform: translateY(0);
+  transition: transform 1300ms cubic-bezier(0.2, 0.7, 0.35, 1) 350ms;
+}
+
+/* Setting: drifts along, then drops behind the hills */
+.dark .sky-orbit-sun {
+  transform: translateX(16%);
+  transition: transform 1000ms cubic-bezier(0.3, 0.6, 0.5, 1);
+}
+
+.dark .sky-orbit-sun > .sky-lift,
+.sky-orbit-moon > .sky-lift {
+  transform: translateY(100%);
+  transition: transform 1000ms cubic-bezier(0.6, 0, 0.8, 0.4);
+}
+
+/* The moon rests below the horizon to the left and the sun to the right, so
+   the two swing past each other rather than along the same track. */
+.sky-orbit-moon {
+  transform: translateX(-16%);
+  transition: transform 1000ms cubic-bezier(0.3, 0.6, 0.5, 1);
+}
+
+/* ---------- Navigation ---------- */
+/* At the top of the page the bar sits flush with the content; once the page
+   scrolls (or the route opens) it lifts into a frosted panel. */
+/* Fades content out as it scrolls into the gap above the floating bar */
+.nav-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2.5rem;
+  background: linear-gradient(to bottom, var(--bg) 30%, transparent);
+  pointer-events: none;
+}
+
+.nav-shell {
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  transition: background-color 300ms ease, border-color 300ms ease,
+    box-shadow 300ms ease, backdrop-filter 300ms ease;
+}
+
+.nav-shell[data-raised="true"] {
+  background: color-mix(in srgb, var(--bg-elev) 86%, transparent);
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+}
+
+.nav-rail {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.nav-shell[data-raised="true"] .nav-rail {
+  opacity: 1;
+}
+
+.nav-shell[data-raised="true"]:has(.nav-route[data-open="true"]) .nav-rail {
+  opacity: 0;
+}
+
+.nav-badge {
+  background: color-mix(in srgb, var(--brand) 13%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand) 28%, transparent);
+  transition: transform 220ms ease;
+}
+
+a:hover > .nav-badge {
+  transform: rotate(-6deg);
+}
+
+.nav-stop {
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  max-width: 24rem;
+}
+
+.nav-stop-text {
+  animation: nav-stop-in 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes nav-stop-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.nav-btn {
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.nav-btn:hover,
+.nav-btn[data-active="true"] {
+  color: var(--text);
+  background: var(--bg-subtle);
+  border-color: var(--line);
+}
+
+.nav-burger {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 260ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.nav-btn[data-active="true"] .nav-burger-top {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.nav-btn[data-active="true"] .nav-burger-bottom {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* The route panel unfolds by animating its grid row from 0 to its content height */
+.nav-route {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease;
+}
+
+.nav-route[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.nav-link:hover {
+  color: var(--text);
+  background: var(--bg-subtle);
+}
+
+.nav-link[data-here="true"] {
+  color: var(--text);
+  background: color-mix(in srgb, var(--brand) 9%, transparent);
+}
+
+.nav-code {
+  color: var(--text-faint);
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+}
+
+.nav-link[data-here="true"] .nav-code {
+  color: var(--brand);
+  border-color: color-mix(in srgb, var(--brand) 45%, transparent);
+}
+
+/* Theme toggle: the sun shows in dark (switch to light), the moon in light.
+   Both faces share a pivot below the button, half a turn apart. */
+.toggle-dial,
+.toggle-face {
+  transform-origin: 50% 170%;
+}
+
+.toggle-face-back {
+  transform: rotate(180deg);
+}
+
+.toggle-dial {
+  transform: rotate(180deg);
+  transition: transform 700ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.dark .toggle-dial {
+  transform: rotate(0deg);
+}
+
 /* ---------- Fork diagram draws itself on reveal ---------- */
 .fork-draw {
   stroke-dasharray: 1;
@@ -540,6 +746,16 @@ body::after {
   .beam,
   .blink,
   .ties-run {
+    animation: none;
+  }
+  .sky-orbit,
+  .sky-lift,
+  .toggle-dial,
+  .nav-route,
+  .nav-burger {
+    transition: none !important;
+  }
+  .nav-stop-text {
     animation: none;
   }
 }

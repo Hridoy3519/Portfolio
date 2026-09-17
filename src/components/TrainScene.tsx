@@ -74,15 +74,19 @@ export default function TrainScene() {
         }}
       />
 
-      {/* Sun by day, moon by night */}
-      <div
-        className="absolute right-[12%] h-9 w-9 rounded-full transition-colors duration-500 md:h-11 md:w-11"
-        style={{
-          top: "var(--sky-body-top)",
-          background: "var(--sky-body)",
-          boxShadow: "0 0 42px 12px var(--sky-glow)",
-        }}
-      />
+      {/* Sun by day, moon by night — on a toggle one sets behind the hills as
+          the other rises. The outer layer carries the sideways drift and the
+          inner the climb or fall, eased differently so the path arcs. */}
+      <div className="sky-orbit sky-orbit-sun absolute inset-0">
+        <div className="sky-lift absolute inset-0">
+          <div className="sky-disc sky-sun absolute right-[12%] top-[11%] h-9 w-9 rounded-full md:h-11 md:w-11" />
+        </div>
+      </div>
+      <div className="sky-orbit sky-orbit-moon absolute inset-0">
+        <div className="sky-lift absolute inset-0">
+          <div className="sky-disc sky-moon absolute right-[12%] top-[12%] h-9 w-9 rounded-full md:h-11 md:w-11" />
+        </div>
+      </div>
 
       {/* Far hills — the tea gardens */}
       <div className="drift-slow absolute bottom-10 left-0 flex w-[200%] opacity-40">

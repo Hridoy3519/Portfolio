@@ -143,7 +143,8 @@ export default function Overview() {
                         <span
                           className="font-mono text-[0.68rem] tracking-wide uppercase"
                           style={{
-                            color: stop.current ? "var(--board-ink)" : "rgba(255,255,255,0.35)",
+                            color: stop.current ? "var(--board-live)" : "rgba(255,255,255,0.35)",
+                            textShadow: stop.current ? "0 0 12px rgba(74, 222, 128, 0.35)" : undefined,
                           }}
                         >
                           {stop.current ? "● Current" : "Completed"}
