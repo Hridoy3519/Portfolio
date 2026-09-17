@@ -10,6 +10,7 @@ import {
   serviceInfo,
   socials,
 } from "@/content/site";
+import CvActions from "./CvActions";
 import Reveal from "./Reveal";
 import SplitFlap from "./SplitFlap";
 import TrainScene from "./TrainScene";
@@ -70,7 +71,7 @@ export default function Overview() {
         </Reveal>
 
         <Reveal delay={160}>
-          <p className="mt-7 max-w-xl text-[0.98rem] leading-relaxed text-muted md:text-lg">
+          <p className="mt-7 max-w-2xl text-[0.98rem] leading-relaxed text-muted md:text-lg">
             {profile.tagline}
           </p>
         </Reveal>
@@ -170,7 +171,9 @@ export default function Overview() {
                       {item.label}
                     </dt>
                     <dd className="mt-1.5 text-[0.8rem] leading-snug text-white/75">
-                      {item.href ? (
+                      {item.cv && item.href ? (
+                        <CvActions href={item.href} download={item.download ?? ""} />
+                      ) : item.href ? (
                         <a
                           href={item.href}
                           download={item.download}

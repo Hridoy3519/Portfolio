@@ -54,6 +54,8 @@ export const serviceInfo: {
   href?: string;
   /** Filename the browser saves the linked file as. */
   download?: string;
+  /** Renders the CV controls — read it in place, or download it — as one entry. */
+  cv?: boolean;
 }[] = [
   { label: "Graduating", value: "July 2027, Helsinki" },
   ...(profile.workAuthorisation
@@ -69,9 +71,10 @@ export const serviceInfo: {
     ? [
         {
           label: "Curriculum vitae",
-          value: "Download PDF ↓",
+          value: "Read here · Download ↓",
           href: profile.cvUrl,
           download: "Md-Hridoy-Chowdhury-CV.pdf",
+          cv: true,
         },
       ]
     : []),
@@ -356,7 +359,7 @@ export const stops: Stop[] = [
     logo: "/orgs/ge-healthcare.png",
     kind: "Experience",
     role: "Software Engineer Intern",
-    period: "Summer 2026 – Present",
+    period: "May 2026 – Present",
     place: "Helsinki, Finland",
     color: "#34d399",
     current: true,
