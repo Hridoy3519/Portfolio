@@ -4,7 +4,7 @@ My personal portfolio, built as a **rail journey** rather than a conventional r√
 Visitors arrive at a split-flap departure board, board the train, and travel through the
 stations that make up my career so far.
 
-**Live site:** [hridoy-chowdhury.vercel.app](https://hridoy-chowdhury.vercel.app)
+**Live site:** [hridoy.eu](https://hridoy.eu)
 
 ## The route
 
