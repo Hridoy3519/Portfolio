@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hridoy Chowdhury</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Layout: one phone-width column. Identity, then the Caplar pitch as the single
+     indigo block (the app's own colour) holding a task card drawn like the app's
+     Home screen and the only solid button, then plain contact rows. */
+  :root {
+    --paper: #f5f3ff;        /* lavender-tinted ground */
+    --surface: #ffffff;
+    --ink: #100d2b;          /* Caplar ink */
+    --muted: #5d5982;
+    --line: #dedaf6;
+    --accent: #5b59f2;       /* Caplar indigo */
+    --accent-soft: #eae6ff;
+    --pitch-a: #7f7dfb;      /* pitch block, top */
+    --pitch-b: #5451e6;      /* pitch block, bottom */
+    --pitch-ink: #ffffff;
+    --pitch-muted: #e6e3ff;
+    --pitch-line: rgba(255,255,255,.34);
+    --card: #ffffff;         /* task card inside the pitch */
+    --card-ink: #100d2b;
+    --card-muted: #6a668c;
+    --chip: #eae6ff;
+    --chip-ink: #4b48d6;
+    --cta: #ffffff;
+    --cta-ink: #3f3dc9;
+    --display: "Bricolage Grotesque", "Trebuchet MS", "Segoe UI", sans-serif;
+    --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0b0a1e;
+      --surface: #15143a;
+      --ink: #f1eeff;
+      --muted: #a9a4d2;
+      --line: #2a2858;
+      --accent: #a5a1ff;
+      --accent-soft: #24225a;
+      --pitch-a: #5f5ce8;
+      --pitch-b: #3f3dc9;
+      --pitch-ink: #ffffff;
+      --pitch-muted: #dcd8ff;
+      --pitch-line: rgba(255,255,255,.28);
+      --card: #131238;
+      --card-ink: #f1eeff;
+      --card-muted: #b3aee0;
+      --chip: #2c2a6e;
+      --chip-ink: #cfcaff;
+      --cta: #ffffff;
+      --cta-ink: #3f3dc9;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0b0a1e;
+    --surface: #15143a;
+    --ink: #f1eeff;
+    --muted: #a9a4d2;
+    --line: #2a2858;
+    --accent: #a5a1ff;
+    --accent-soft: #24225a;
+    --pitch-a: #5f5ce8;
+    --pitch-b: #3f3dc9;
+    --pitch-ink: #ffffff;
+    --pitch-muted: #dcd8ff;
+    --pitch-line: rgba(255,255,255,.28);
+    --card: #131238;
+    --card-ink: #f1eeff;
+    --card-muted: #b3aee0;
+    --chip: #2c2a6e;
+    --chip-ink: #cfcaff;
+    --cta: #ffffff;
+    --cta-ink: #3f3dc9;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  main {
+    max-width: 460px;
+    margin: 0 auto;
+    padding-block: 36px 40px;
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  a { color: inherit; }
+  a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* Identity */
+  .who { display: flex; flex-direction: column; gap: 10px; }
+  .where {
+    align-self: flex-start;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 999px;
+    padding: 5px 12px;
+    margin: 0;
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(38px, 11vw, 50px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .role { margin: 0; font-size: 18px; }
+  .creds { margin: 0; font-size: 15px; color: var(--muted); }
+
+  /* Caplar pitch */
+  .pitch {
+    background: linear-gradient(180deg, var(--pitch-a), var(--pitch-b));
+    color: var(--pitch-ink);
+    border-radius: 24px;
+    padding: 22px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .pitch-head { display: flex; align-items: center; gap: 12px; }
+  .mark { flex: none; border-radius: 11px; display: block; }
+  .pitch-name {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0;
+  }
+  .status {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pitch-ink);
+    border: 1px solid var(--pitch-line);
+    border-radius: 999px;
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+  .pitch h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(27px, 7.6vw, 33px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .pitch h2 em {
+    font-style: normal;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 5px;
+    text-decoration-color: var(--pitch-line);
+  }
+  .pitch p { margin: 0; color: var(--pitch-muted); font-size: 16px; }
+
+  /* Example task, drawn like a row on the app's Home screen */
+  .task {
+    background: var(--card);
+    color: var(--card-ink);
+    border-radius: 18px;
+    padding: 14px 14px 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .check {
+    flex: none;
+    width: 22px; height: 22px;
+    border: 2px solid var(--card-ink);
+    border-radius: 50%;
+  }
+  .task-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .task-title { font-weight: 600; }
+  .task-meta { font-size: 14px; color: var(--card-muted); }
+  .penalty {
+    flex: none;
+    font-weight: 600;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    background: var(--chip);
+    color: var(--chip-ink);
+    border-radius: 9px;
+    padding: 4px 9px;
+    white-space: nowrap;
+  }
+
+  .cta {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: var(--cta);
+    color: var(--cta-ink);
+    font-weight: 600;
+    font-size: 18px;
+    padding: 15px 18px;
+    border-radius: 16px;
+  }
+  .cta:hover { filter: brightness(0.96); }
+  .pitch a:focus-visible { outline-color: var(--pitch-ink); }
+  .pitch .cta-note { text-align: center; font-size: 14px; }
+
+  /* The ask */
+  .ask {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 18px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ask-lead {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 1.2;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .ask-body { margin: 0; color: var(--muted); }
+  .ask-link {
+    align-self: flex-start;
+    margin-top: 6px;
+    font-weight: 600;
+    color: var(--accent);
+    text-underline-offset: 4px;
+  }
+
+  /* Contact rows */
+  .group { display: flex; flex-direction: column; gap: 10px; }
+  .section-title {
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+  .rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .rows li + li { border-top: 1px solid var(--line); }
+  .rows a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .rows a:hover { background: var(--accent-soft); }
+  .rows .label { font-weight: 600; flex: none; }
+  .rows .value {
+    color: var(--muted);
+    font-size: 15px;
+    text-align: right;
+    overflow-wrap: anywhere;
+    min-width: 0;
+    user-select: all;
+  }
+
+  .inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+  }
+  .inline a {
+    display: block;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 999px;
+    padding: 7px 14px;
+  }
+
+  footer { font-size: 14px; color: var(--muted); }
+  footer p { margin: 0; }
+</style>
+
+</head>
+<body>
+<main>
+
+  <header class="who">
+    <p class="where">Helsinki · at Slush 18–19 Nov</p>
+    <h1>Hridoy Chowdhury</h1>
+    <p class="role">I build iOS apps. Right now that means Caplar.</p>
+    <p class="creds">MSc Computer Science, University of Helsinki. Software Engineer Intern at GE HealthCare.</p>
+  </header>
+
+  <section class="pitch" aria-labelledby="caplar-title">
+    <div class="pitch-head">
+      <svg class="mark" aria-hidden="true" width="44" height="44" viewBox="0 0 257 257" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame 52">
+<g id="Frame 49">
+<g id="Frame 51">
+<g id="Icon 2.0" filter="url(#filter0_i_27_2)">
+<g clip-path="url(#clip0_27_2)">
+<rect width="256.581" height="256.581" rx="56.4241" fill="url(#paint0_linear_27_2)"/>
+<g id="Frame 47">
+<g id="Group 15">
+<g id="Body">
+<path id="Rectangle 17" d="M14.5909 86.5859C21.1927 71.2338 36.1326 38.2742 53.8099 39.9924C71.4872 41.7107 86.8106 70.9118 86.8106 70.9118C86.8106 70.9118 111.787 65.6712 128.008 65.6712C144.229 65.6712 169.205 70.9118 169.205 70.9118C169.205 70.9118 184.529 41.7106 202.206 39.9924C219.883 38.2742 234.823 71.2338 241.425 86.5859C248.027 101.938 248.825 112.197 251.495 128.468C254.164 144.739 254.398 156.403 255.205 170.349C256.011 184.295 256.069 296.521 256.069 296.521C256.069 296.521 144.598 296.569 128.008 296.518C111.418 296.467 -0.502269 297.022 -0.501015 297.022C-0.49979 297.023 -0.499762 297.023 -0.501015 297.022C-0.502269 297.022 -0.502241 297.022 -0.501015 297.022C-0.502269 297.022 -0.499762 297.023 -0.501015 297.022C-0.499762 297.023 0.0291358 184.026 0.811278 170.349C1.59342 156.673 1.85185 144.739 4.52119 128.468C7.19053 112.197 7.98912 101.938 14.5909 86.5859Z" fill="url(#paint1_linear_27_2)"/>
+<path id="Rectangle 19" d="M52.7893 54.5195C59.825 54.3925 63.1602 57.3529 67.149 63.2773C71.1378 69.2017 74.0629 76.3018 74.0629 76.3018C74.0629 76.3018 65.8194 79.2604 56.5122 84.3708C47.205 89.4811 44.8117 91.0949 38.6956 95.9363C32.5794 100.778 24.3359 109.385 24.3359 109.385C24.3359 109.385 25.5719 93.4145 30.4521 81.4122C35.3323 69.4098 45.7537 54.6466 52.7893 54.5195Z" fill="#C1B7F9"/>
+<path id="Rectangle 19_2" d="M203.254 54.5195C196.218 54.3925 192.883 57.3529 188.894 63.2773C184.905 69.2017 181.98 76.3018 181.98 76.3018C181.98 76.3018 190.224 79.2604 199.531 84.3708C208.838 89.4811 211.231 91.0949 217.347 95.9363C223.464 100.778 231.707 109.385 231.707 109.385C231.707 109.385 230.471 93.4145 225.591 81.4122C220.711 69.4098 210.289 54.6466 203.254 54.5195Z" fill="#C1B7F9"/>
+<path id="Vector 1" d="M109.264 69.5804C110.668 70.4301 116.67 72.808 116.67 72.808L150.527 68.7735C150.527 68.7735 150.728 67.1375 150.792 66.0839C150.855 65.0303 150.853 62.939 150.792 61.7804C150.73 60.6219 150.736 59.7954 150.527 58.8218C150.318 57.8483 150.158 57.2993 149.733 56.4011C149.309 55.503 148.622 54.5362 147.882 53.7115C147.142 52.8867 146.646 52.1335 145.766 51.8287C144.886 51.524 144.281 51.5743 143.385 51.8287C142.49 52.0832 141.91 52.4272 141.269 53.1735C140.628 53.9199 140.424 54.7528 140.211 55.8632C139.999 56.9736 140.255 57.6673 140.211 58.8218C140.168 59.9764 139.856 62.8756 139.682 63.9322C139.509 64.9888 139.153 66.6218 139.153 66.6218L138.36 63.9322L137.566 61.5115C137.566 61.5115 137.109 60.3519 136.773 59.6287C136.437 58.9055 134.657 55.8632 134.657 55.8632L132.805 53.1735C132.805 53.1735 131.233 51.1759 130.425 50.2149C129.616 49.254 128.98 48.3856 128.309 47.7942C127.637 47.2029 127.266 46.8237 126.457 46.4494C125.648 46.0752 124.865 45.9303 123.812 45.9115C122.759 45.8927 121.71 46.0734 120.902 46.4494C120.094 46.8254 119.656 47.1325 119.051 47.7942C118.446 48.456 118.004 49.1704 117.728 50.2149C117.453 51.2594 117.524 52.037 117.728 53.1735C117.933 54.3101 119.051 56.4011 119.051 56.4011L120.902 60.1666L123.018 63.9322L124.87 67.1597L120.902 63.9322L118.257 62.3184C118.257 62.3184 116.262 61.1582 115.348 60.7046C114.434 60.251 113.96 59.8553 112.967 59.6287C111.975 59.4021 111.003 59.5138 110.058 59.6287C109.112 59.7437 107.677 60.1666 107.677 60.1666C107.677 60.1666 106.326 60.7647 105.826 61.5115C105.325 62.2583 105.348 62.9652 105.297 63.9322C105.246 64.8992 105.212 66.0446 105.826 67.1597C106.439 68.2749 107.861 68.7307 109.264 69.5804Z" fill="#EAE6FF"/>
+</g>
+<g id="Face">
+<g id="Eyes">
+<g id="Left eye">
+<ellipse id="Ellipse 1" cx="73.3252" cy="155.559" rx="36.2959" ry="43.2702" fill="white"/>
+<g id="Vector">
+<path d="M98.1459 155.273C98.1459 173.59 87.0301 188.439 73.3181 188.439C59.606 188.439 48.4902 173.59 48.4902 155.273C48.4902 151.169 49.0484 147.239 50.0688 143.611C51.8529 137.267 55.0502 131.847 59.1484 128.036C63.1666 124.299 68.0508 122.107 73.3181 122.107C87.0301 122.107 98.1459 136.956 98.1459 155.273Z" fill="#100D2B"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M57.226 146.331C62.8022 146.331 67.3226 142.198 67.3226 137.1C67.3226 132.602 63.8052 128.856 59.1484 128.036C55.0502 131.847 51.8529 137.267 50.0688 143.611C51.8973 145.291 54.4288 146.331 57.226 146.331Z" fill="white"/>
+</g>
+</g>
+<g id="Right eye">
+<ellipse id="Ellipse 1_2" cx="182.255" cy="155.559" rx="36.2959" ry="43.2702" fill="white"/>
+<g id="Vector_2">
+<path d="M207.074 155.273C207.074 173.59 195.958 188.439 182.246 188.439C168.534 188.439 157.418 173.59 157.418 155.273C157.418 151.169 157.976 147.239 158.996 143.611C160.781 137.267 163.978 131.847 168.076 128.036C172.094 124.299 176.979 122.107 182.246 122.107C195.958 122.107 207.074 136.956 207.074 155.273Z" fill="#100D2B"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M166.154 146.331C171.73 146.331 176.25 142.198 176.25 137.1C176.25 132.602 172.733 128.856 168.076 128.036C163.978 131.847 160.781 137.267 158.996 143.611C160.825 145.291 163.357 146.331 166.154 146.331Z" fill="white"/>
+</g>
+</g>
+</g>
+<path id="Mouth" d="M98.9238 219.342C122.732 231.05 135.679 230.583 158.173 219.342" stroke="#100D2B" stroke-width="8.46455" stroke-linecap="round"/>
+</g>
+</g>
+</g>
+</g>
+<rect x="0.534545" y="0.534545" width="255.512" height="255.512" rx="55.8896" stroke="#CCD2FF" stroke-width="1.06909"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_i_27_2" x="0" y="0" width="256.582" height="256.582" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="3.88079"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.782472 0 0 0 0 0.778846 0 0 0 0 1 0 0 0 1 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_27_2"/>
+</filter>
+<linearGradient id="paint0_linear_27_2" x1="128.291" y1="0" x2="128.291" y2="256.581" gradientUnits="userSpaceOnUse">
+<stop stop-color="#8785FD"/>
+<stop offset="1" stop-color="#5B59F2"/>
+</linearGradient>
+<linearGradient id="paint1_linear_27_2" x1="128.021" y1="39.9277" x2="128.021" y2="296.521" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F1EEFF"/>
+<stop offset="1" stop-color="#B7B0FF"/>
+</linearGradient>
+<clipPath id="clip0_27_2">
+<rect width="256.581" height="256.581" rx="56.4241" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+      <p class="pitch-name" id="caplar-title">Caplar</p>
+      <span class="status">Pre-launch · iOS</span>
+    </div>
+    <h2>A to-do app where skipping a task <em>costs you money</em>.</h2>
+    <p>Add a task, attach a penalty if you want one, and check in before midnight. Finish it and your streak grows. Miss it and you pay.</p>
+
+    <div class="task" aria-label="Example task">
+      <span class="check" aria-hidden="true"></span>
+      <span class="task-body">
+        <span class="task-title">Go to the gym</span>
+        <span class="task-meta">Today · 4-day streak</span>
+      </span>
+      <span class="penalty">$5 if missed</span>
+    </div>
+
+    <a class="cta" href="https://caplar.app/#waitlist">Join the waitlist</a>
+    <p class="cta-note">caplar.app · you get an email when it reaches the App Store</p>
+  </section>
+
+  <section class="ask" aria-labelledby="ask-title">
+    <h2 class="section-title" id="ask-title">One favour</h2>
+    <p class="ask-lead">Know someone who has launched a consumer subscription app, or invests in them?</p>
+    <p class="ask-body">Introduce me to that one person. One warm intro beats fifty follows.</p>
+    <a class="ask-link" href="https://www.linkedin.com/in/hridoy3519">Message me on LinkedIn</a>
+  </section>
+
+  <section class="group" aria-labelledby="reach-title">
+    <h2 class="section-title" id="reach-title">Reach me</h2>
+    <ul class="rows">
+      <li><a href="https://www.linkedin.com/in/hridoy3519"><span class="label">LinkedIn</span><span class="value">in/hridoy3519</span></a></li>
+      <li><a href="mailto:hridoybd.official@gmail.com"><span class="label">Email</span><span class="value">hridoybd.official@gmail.com</span></a></li>
+      <li><a href="https://x.com/BeWithHridoy"><span class="label">X</span><span class="value">@BeWithHridoy</span></a></li>
+      <li><a href="https://www.instagram.com/hridoy3519"><span class="label">Instagram</span><span class="value">@hridoy3519</span></a></li>
+      <li><a href="https://github.com/Hridoy3519"><span class="label">GitHub</span><span class="value">Hridoy3519</span></a></li>
+      <li><a href="https://www.hridoy.eu/"><span class="label">Portfolio</span><span class="value">hridoy.eu</span></a></li>
+    </ul>
+  </section>
+
+  <section class="group" aria-labelledby="follow-title">
+    <h2 class="section-title" id="follow-title">Follow Caplar</h2>
+    <ul class="inline">
+      <li><a href="https://x.com/caplarapp">X</a></li>
+      <li><a href="https://www.instagram.com/caplar_app">Instagram</a></li>
+      <li><a href="https://www.tiktok.com/@caplar.habit.app">TikTok</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Volunteering at Slush 2026. Say hi if you see me at a door.</p>
+  </footer>
+
+</main>
+</body>
+</html>
